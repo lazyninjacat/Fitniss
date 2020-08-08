@@ -1102,6 +1102,7 @@ GameObject:
   - component: {fileID: 150000401}
   - component: {fileID: 150000400}
   - component: {fileID: 150000399}
+  - component: {fileID: 150000403}
   m_Layer: 0
   m_Name: Button - Start
   m_TagString: Untagged
@@ -2012,23 +2013,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -2041,17 +2042,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -2064,16 +2065,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -2085,12 +2086,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
@@ -3464,7 +3465,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 150000401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2046205773}
+        m_MethodName: StartButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &150000401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3502,6 +3514,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150000397}
   m_CullTransparentMesh: 0
+--- !u!225 &150000403
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150000397}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &192899762
 GameObject:
   m_ObjectHideFlags: 0
@@ -4425,23 +4449,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -4454,17 +4478,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -4477,16 +4501,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -4498,12 +4522,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
@@ -7185,23 +7209,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -7214,17 +7238,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -7237,16 +7261,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -7258,12 +7282,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
@@ -9837,23 +9861,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -9866,17 +9890,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -9889,16 +9913,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -9910,12 +9934,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
@@ -13872,23 +13896,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -13901,17 +13925,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -13924,16 +13948,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -13945,12 +13969,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
@@ -16662,23 +16686,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -16691,17 +16715,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -16714,16 +16738,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -16735,12 +16759,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
@@ -19144,7 +19168,7 @@ GameObject:
   - component: {fileID: 1059772612}
   - component: {fileID: 1059772611}
   m_Layer: 0
-  m_Name: UIButton
+  m_Name: Button - Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20053,23 +20077,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -20082,17 +20106,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -20105,16 +20129,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -20126,12 +20150,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
@@ -22370,11 +22394,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -23402,23 +23426,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -23431,17 +23455,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -23454,16 +23478,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -23475,12 +23499,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
@@ -26127,23 +26151,23 @@ MonoBehaviour:
       GameEvents: []
       SoundData:
         SoundSource: 0
-        DatabaseName: General
-        SoundName: No Sound
+        DatabaseName: Example Clicks
+        SoundName: Plastic Switch
         AudioClip: {fileID: 0}
         OutputAudioMixerGroup: {fileID: 0}
-    PresetCategory: Uncategorized
-    PresetName: Default
+    PresetCategory: Jump
+    PresetName: ClickIn
     PunchAnimation:
       AnimationType: 4
       Move:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 12
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         Direction: 0
@@ -26156,17 +26180,17 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        StartDelay: 0
-        Duration: 1
+        StartDelay: 0.1
+        Duration: 0.3
       Rotate:
         AnimationType: 4
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: -10}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 4
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         RotateMode: 1
@@ -26179,16 +26203,16 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.2, y: -0.2, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 8
+        Elasticity: 0.5
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -26200,12 +26224,12 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.3
       Fade:
         AnimationType: 4
         Enabled: 0
         From: 0
-        To: 0
+        To: 1
         By: 0.5
         UseCustomFromAndTo: 0
         NumberOfLoops: -1
