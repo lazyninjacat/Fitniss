@@ -3,7 +3,7 @@
 public class Circuit
 {
     [PrimaryKey]
-    public int Order { get; set; }
+    public int OrderID { get; set; }
     public string ExerciseName { get; set; }
     public string ExerciseAmount { get; set; }
 
@@ -11,6 +11,6 @@ public class Circuit
 
     public override string ToString()
     {
-        return string.Format("[Circuit: Order={0}, ExerciseName={1}, ExerciseAmount={2}]", Order, ExerciseName, ExerciseAmount);
+        return string.Format("[Circuit: OrderID={0}, ExerciseName={1}, ExerciseAmount={2}]", OrderID, ExerciseName, ExerciseAmount);
     }
 }

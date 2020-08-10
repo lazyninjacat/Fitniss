@@ -331,8 +331,8 @@ PlayerSettings:
       m_Kind: 1
       m_SubKind: 
     - m_Textures:
-      - {fileID: 2800000, guid: dd5d864c2839c7740a513df247b01e13, type: 3}
-      - {fileID: 2800000, guid: c062deb986e7d734bac91431ac1408bc, type: 3}
+      - {fileID: 2800000, guid: 84f0bb218caba8748ad73e9cd6200f78, type: 3}
+      - {fileID: 2800000, guid: 59df520fbaf197e4b85f8d0bd76a7935, type: 3}
       m_Width: 432
       m_Height: 432
       m_Kind: 2
@@ -640,17 +640,17 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
-    1: dUI_MANAGER;dUI_TextMeshPro
-    4: dUI_MANAGER;dUI_TextMeshPro
-    7: dUI_MANAGER;dUI_TextMeshPro
-    13: dUI_MANAGER;dUI_TextMeshPro
-    14: dUI_MANAGER;dUI_TextMeshPro
-    19: dUI_MANAGER;dUI_TextMeshPro
-    21: dUI_MANAGER;dUI_TextMeshPro
-    25: dUI_MANAGER;dUI_TextMeshPro
-    27: dUI_MANAGER;dUI_TextMeshPro
-    28: dUI_MANAGER;dUI_TextMeshPro
-    29: dUI_MANAGER;dUI_TextMeshPro
+    1: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    4: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    7: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    13: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    14: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    19: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    21: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    25: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    27: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    28: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
+    29: dUI_MANAGER;dUI_TextMeshPro;EASY_MOBILE;EASY_MOBILE_PRO;EM_CAMERA_GALLERY
   platformArchitecture: {}
   scriptingBackend:
     Android: 1

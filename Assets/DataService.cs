@@ -101,6 +101,29 @@ public class DataService  {
     {
         return _connection.Table<Circuit>().Count();
     }
+
+    public int GetPresetCount()
+    {
+        return _connection.Table<CircuitPreset>().Count();
+    }
+
+
+    ///<summary>SQL query to reset the auto increment sequence number back to the value given</summary>
+    ///<param name="tableName">the name of the table to reset the sequence number</param>
+    ///<param name="resetToInt">the number to reset the sequence to</param>
+    public void ReseedTable(string tableName, int resetToInt)
+    {
+        string cmd = "UPDATE SQLITE_SEQUENCE SET seq = ? WHERE name = ?";
+        _connection.Execute(cmd, resetToInt, tableName);
+
+    }
+
+    public int AddUserLogEntry(string dateStr, float weight, float waist)
+    {
+        string query = "INSERT INTO UserLog (Timestamp, Weight, Waist) VALUES(?, ?, ?)";
+        return _connection.Execute(query, dateStr, weight, waist);
+    }
+
 }
 
   /*  © 2018 GitHub, Inc.

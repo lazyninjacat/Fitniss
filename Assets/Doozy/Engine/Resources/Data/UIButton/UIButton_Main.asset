@@ -22,3 +22,9 @@ MonoBehaviour:
   - Start
   - ConfirmYes
   - ConfirmNo
+  - ViewCircuitPresets
+  - LoadCircuitPreset
+  - SaveRecord
+  - TakePicture
+  - ViewHistory
+  - NewRecord

@@ -20,3 +20,7 @@ MonoBehaviour:
   - ConfigMenu
   - Log
   - ConfirmQuitCircuit
+  - CircuitPresets
+  - ConfirmLoadPreset
+  - ViewHistory
+  - NewRecord
