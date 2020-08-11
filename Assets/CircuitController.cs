@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CircuitController : MonoBehaviour
@@ -20,6 +21,7 @@ public class CircuitController : MonoBehaviour
     [SerializeField] TMP_InputField weightInputField;
     [SerializeField] TMP_InputField waistInputField;
     [SerializeField] Button saveButton;
+    [SerializeField] Text testingText;
 
     private float currentWeight;
     private float currentWaist;
@@ -41,7 +43,10 @@ public class CircuitController : MonoBehaviour
     private float circuitProgress;
 
     private string selectedCircuitPreset;
-    
+
+    private string recordID;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -104,11 +109,10 @@ public class CircuitController : MonoBehaviour
         }
     }
 
-    private string recordID;
 
     private void SaveTexture() 
-    { 
-        if (FileAccessUtil.SavePic(CurrentTexture, recordID))
+    {
+        if (FileAccessUtil.SavePic(CurrentTexture, recordID.Replace(":", "").Replace("/", "")))
         {
             Debug.Log("Pic " + recordID + " saved");
         }
@@ -137,6 +141,11 @@ public class CircuitController : MonoBehaviour
         newRecordImageTexture2D.texture = CurrentTexture;
             
         Debug.Log("loadimagecallback");
+    }
+
+    public void TestSceneButton()
+    {
+        SceneManager.LoadScene("MediaDemo");
     }
 
     public void SaveRecordButton()
@@ -173,13 +182,14 @@ public class CircuitController : MonoBehaviour
 
             if (circuitOrder <= circuitCount)
             {
+                dataService.AddExerciseLogEntry(DateTime.Now.ToString(), CurrentExerciseName.text, CurrentExerciseAmount.text);
                 CurrentExerciseName.text = dataService.GetExerciseName(circuitOrder);
                 CurrentExerciseAmount.text = dataService.GetExerciseAmount(circuitOrder);
             }
             else
             {
                 CurrentExerciseName.text = "Complete!!!";
-                CurrentExerciseAmount.text = "Tap Done to return to start menu";
+                CurrentExerciseAmount.text = "";
                 circuitComplete = true;
             }
         }
@@ -194,9 +204,24 @@ public class CircuitController : MonoBehaviour
         CurrentTexture = null;
     }
 
+
+
+
+
     // Update is called once per frame
     void Update()
     {
+        if (CurrentTexture != null)
+        {
+            testingText.text = "CurrentTexture is not null.";
+        }
+        else
+        {
+            testingText.text = "CurrentTexture is null.";
+        }
+        
+        
+        
         if (weightInputField.text != null || weightInputField.text != "")
         {
             if (waistInputField.text != null || waistInputField.text != "")

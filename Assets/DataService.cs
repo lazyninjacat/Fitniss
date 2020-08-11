@@ -124,6 +124,12 @@ public class DataService  {
         return _connection.Execute(query, dateStr, weight, waist);
     }
 
+    public int AddExerciseLogEntry(string dateStr, string exName, string exAmount)
+    {
+        string query = "INSERT INTO ExerciseLog (Timestamp, ExerciseName, ExerciseAmount) VALUES(?,?,?)";
+        return _connection.Execute(query, dateStr, exName, exAmount);
+    }
+
 }
 
   /*  © 2018 GitHub, Inc.

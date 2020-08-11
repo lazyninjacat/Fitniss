@@ -26,5 +26,7 @@ MonoBehaviour:
   - LoadCircuitPreset
   - SaveRecord
   - TakePicture
-  - ViewHistory
+  - ExerciseLog
   - NewRecord
+  - UserLog
+  - ViewHistory
