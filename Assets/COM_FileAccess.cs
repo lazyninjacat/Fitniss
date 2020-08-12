@@ -413,7 +413,7 @@ public static class FileAccessUtil
     // TODO: Find refs to this method and change them over to the new setup
     public static byte[] LoadPhoto(string fileName)
     {
-        string filePath = PICTURE_DIRECTORY + "/" + fileName.ToLower();
+        string filePath = PICTURE_DIRECTORY;
 
         if (!Directory.Exists(PICTURE_DIRECTORY))
         {

@@ -1,6 +1,5 @@
 ﻿using Doozy.Engine.Nody;
 using Doozy.Engine.Progress;
-using EasyMobile;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,18 +16,9 @@ public class CircuitController : MonoBehaviour
     [SerializeField] Progressor progressor;
     [SerializeField] TextMeshProUGUI confirmLoadPresetText;
     [SerializeField] TextMeshProUGUI currentPresetText;
-    [SerializeField] RawImage newRecordImageTexture2D;
-    [SerializeField] TMP_InputField weightInputField;
-    [SerializeField] TMP_InputField waistInputField;
-    [SerializeField] Button saveButton;
-    [SerializeField] Text testingText;
 
-    private float currentWeight;
-    private float currentWaist;
 
-    public Texture2D CurrentTexture { get; set; }
-
-    public string PicID { get; set; }
+ 
 
 
     private GraphController graphcontroller;
@@ -44,7 +34,6 @@ public class CircuitController : MonoBehaviour
 
     private string selectedCircuitPreset;
 
-    private string recordID;
 
 
     // Start is called before the first frame update
@@ -90,85 +79,14 @@ public class CircuitController : MonoBehaviour
         Debug.Log("Preset staged: " + selectedCircuitPreset);
     }
 
-    public void TakePicture()
-    {
-        Debug.Log("Take Picture");
-        EasyMobile.CameraType cameraType = EasyMobile.CameraType.Front;
-        Media.Camera.TakePicture(cameraType, TakePictureCallback);
-    }
-
-    private void TakePictureCallback(string error, MediaResult result)
-    {
-        if (!string.IsNullOrEmpty(error))
-        {
-            Debug.Log("Error on take picture with native camera app");
-        }
-        else
-        {
-            Media.Gallery.LoadImage(result, LoadImageCallback);
-        }
-    }
-
-
-    private void SaveTexture() 
-    {
-        if (FileAccessUtil.SavePic(CurrentTexture, recordID.Replace(":", "").Replace("/", "")))
-        {
-            Debug.Log("Pic " + recordID + " saved");
-        }
-        else
-        {
-            Debug.Log("error, pic " + recordID + " not saved");
-        }
-    }
-
-    [SerializeField] GameObject newRecordImageObject;
-
-    private void LoadImageCallback(string error, Texture2D image)
-    {
-        if (!string.IsNullOrEmpty(error))
-        {
-            // TODO: There was an error, show it to users. 
-            Debug.Log("Error on load image callback");
-        }
-        else
-        {
-            CurrentTexture = image;
-            Debug.Log("Current texture set");
-        }
-        newRecordImageObject.SetActive(true);
-
-        newRecordImageTexture2D.texture = CurrentTexture;
-            
-        Debug.Log("loadimagecallback");
-    }
+   
 
     public void TestSceneButton()
     {
         SceneManager.LoadScene("MediaDemo");
     }
 
-    public void SaveRecordButton()
-    {
-        recordID = DateTime.Now.ToString();
-        currentWeight = float.Parse(weightInputField.text);
-        currentWaist = float.Parse(waistInputField.text);
-        
-        
-        if (dataService.AddUserLogEntry(recordID, currentWeight, currentWaist) == 1)
-        {
-            Debug.Log("Userlog Added");
-        }
-        else
-        {
-            Debug.Log("Error, Userlog NOT Added");
-        }
-
-        SaveTexture();
-        newRecordImageObject.SetActive(false);
-
-
-    }
+   
 
     public void DoneButton()
     {
@@ -199,10 +117,6 @@ public class CircuitController : MonoBehaviour
         }     
     }
 
-    public void CancelNewRecord()
-    {
-        CurrentTexture = null;
-    }
 
 
 
@@ -211,38 +125,10 @@ public class CircuitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CurrentTexture != null)
-        {
-            testingText.text = "CurrentTexture is not null.";
-        }
-        else
-        {
-            testingText.text = "CurrentTexture is null.";
-        }
         
-        
-        
-        if (weightInputField.text != null || weightInputField.text != "")
-        {
-            if (waistInputField.text != null || waistInputField.text != "")
-            {
-                if (CurrentTexture != null)
-                {
-                    saveButton.interactable = true;
-                }
-                else
-                {
-                    saveButton.interactable = false;
-                }
-            }
-            else
-            {
-                saveButton.interactable = false;
-            }
-        }
-        else
-        {
-            saveButton.interactable = false;
-        }
     }
+
+
+
+
 }

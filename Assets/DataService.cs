@@ -2,6 +2,8 @@
 using SQLite4Unity3d;
 using UnityEngine;
 using System;
+using System.Linq;
+using System.Data;
 #if !UNITY_EDITOR
 using System.Collections;
 using System.IO;
@@ -80,7 +82,7 @@ public class DataService  {
         return _connection.Table<Circuit>();
     }
 
-    public IEnumerable<Config> GetConfogTable()
+    public IEnumerable<Config> GetConfigTable()
     {
         return _connection.Table<Config>();
     }
@@ -96,6 +98,7 @@ public class DataService  {
         string query = "SELECT ExerciseAmount FROM Circuit WHERE OrderID = ?";
         return _connection.ExecuteScalar<string>(query, orderID);
     }
+
 
     public int GetCircuitCount()
     {
@@ -120,6 +123,7 @@ public class DataService  {
 
     public int AddUserLogEntry(string dateStr, float weight, float waist)
     {
+        Debug.Log("**********************************Dataservice add user log entry");
         string query = "INSERT INTO UserLog (Timestamp, Weight, Waist) VALUES(?, ?, ?)";
         return _connection.Execute(query, dateStr, weight, waist);
     }
