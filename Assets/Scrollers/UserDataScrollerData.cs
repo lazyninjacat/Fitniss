@@ -1,7 +1,7 @@
 ﻿public class UserDataScrollerData
 {
-    public string userDataTimestamp;
-    public float userDataWeight;
-    public float userDataWaist;
+    public string timestamp;
+    public float weight;
+    public float waist;
 
 }

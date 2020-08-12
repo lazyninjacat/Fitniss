@@ -7,7 +7,7 @@ public class PresetScrollerController : MonoBehaviour, IEnhancedScrollerDelegate
 {
     private List<PresetScrollerData > _data;
 
-    public EnhancedScroller myScroller;
+    public EnhancedScroller presetScroller;
     public PresetCellView presetCellViewPrefab;
 
 	void Start () 
@@ -27,8 +27,8 @@ public class PresetScrollerController : MonoBehaviour, IEnhancedScrollerDelegate
         _data.Add(new PresetScrollerData () { presetName = "Falcon" });
         _data.Add(new PresetScrollerData () { presetName = "Mouse" });
 
-        myScroller.Delegate = this;
-        myScroller.ReloadData();
+        presetScroller.Delegate = this;
+        presetScroller.ReloadData();
     }
 
     public int GetNumberOfCells(EnhancedScroller scroller)

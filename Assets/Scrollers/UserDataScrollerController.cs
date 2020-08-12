@@ -2,37 +2,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using EnhancedUI.EnhancedScroller;
+using System;
+using System.Data;
 
 public class UserDataScrollerController : MonoBehaviour, IEnhancedScrollerDelegate
 {
     private List<UserDataScrollerData> _data;
 
-    public EnhancedScroller myScroller;
+    public EnhancedScroller useDataScroller;
+
     public UserDataCellView UserDataCellViewPrefab;
 
     private DataService dataService;
-    private List<UserLog> userLog;
+
+    public UserDataCellView userDataCellViewPrefab;
+
+
+
 
 
     void Start()
     {
-
         dataService = StartupScript.ds;
 
-     
+        _data = new List<UserDataScrollerData>();    
 
-        _data = new List<UserDataScrollerData>();
+        IEnumerable<UserLog> useDataLog = dataService.GetUserLog();
+
+        foreach (var row in useDataLog)
+        {
+            _data.Add(new UserDataScrollerData()
+            {
+                timestamp = row.Timestamp,
+                weight = row.Weight,
+                waist = row.Waist
+            });
+        }
 
 
+        useDataScroller.Delegate = this;
+        useDataScroller.ReloadData();
 
-
-        _data.Add(new UserDataScrollerData() { userDataTimestamp = "Lion" });
-        _data.Add(new UserDataScrollerData() { userDataTimestamp = "Bear" });
-        _data.Add(new UserDataScrollerData() { userDataTimestamp = "Eagle" });
- 
-
-        myScroller.Delegate = this;
-        myScroller.ReloadData();
     }
 
     public int GetNumberOfCells(EnhancedScroller scroller)
@@ -47,11 +57,11 @@ public class UserDataScrollerController : MonoBehaviour, IEnhancedScrollerDelega
 
     public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int dataIndex, int cellIndex)
     {
-        UserDataCellView cellView = scroller.GetCellView(UserDataCellViewPrefab) as UserDataCellView;
+        UserDataCellView useDataCellView = scroller.GetCellView(userDataCellViewPrefab) as UserDataCellView;
 
-        cellView.SetData(_data[dataIndex]);
+        useDataCellView.SetData(_data[dataIndex]);
 
-        return cellView;
+        return useDataCellView;
     }
 
 }
