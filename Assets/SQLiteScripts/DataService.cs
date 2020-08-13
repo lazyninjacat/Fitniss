@@ -99,6 +99,12 @@ public class DataService  {
         return _connection.ExecuteScalar<string>(query, orderID);
     }
 
+    public string GetExerciseType(int orderID)
+    {
+        string query = "SELECT Type FROM Circuit WHERE OrderID = ?";
+        return _connection.ExecuteScalar<string>(query, orderID);
+    }
+
     public IEnumerable<UserLog> GetWeightHistory()
     {
         string query = "SELECT Timestamp, Weight FROM UserLog";

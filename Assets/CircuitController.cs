@@ -13,12 +13,16 @@ public class CircuitController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI CurrentExerciseName;
     [SerializeField] TextMeshProUGUI CurrentExerciseAmount;
-    [SerializeField] Progressor progressor;
+    [SerializeField] Progressor circuitProgressor;
+    [SerializeField] Progressor timeProgressor;
+
     [SerializeField] TextMeshProUGUI confirmLoadPresetText;
     [SerializeField] TextMeshProUGUI currentPresetText;
 
+    [SerializeField] GameObject startTimerButton;
+    [SerializeField] GameObject countdownTimer;
 
- 
+
 
 
     private GraphController graphcontroller;
@@ -41,7 +45,8 @@ public class CircuitController : MonoBehaviour
     {
         circuitComplete = false;
         circuitProgress = 0;
- 
+        startTimerButton.SetActive(false);
+        countdownTimer.SetActive(false);
 
         if (selectedCircuitPreset == null || selectedCircuitPreset == "")
         {
@@ -86,14 +91,38 @@ public class CircuitController : MonoBehaviour
         SceneManager.LoadScene("MediaDemo");
     }
 
-   
+    [SerializeField] Button doneButton;
+
+    private IEnumerator TimerHelper(int minutes)
+    {
+        startTimerButton.SetActive(false);
+        countdownTimer.SetActive(true);
+        CurrentExerciseAmount.text = minutes + " minutes";
+
+        int seconds = minutes * 60;
+
+        for (int i = 1; i <= seconds; i++)
+        {            
+            yield return new WaitForSeconds(1);
+            timeProgressor.SetValue(i / seconds);
+        }
+
+        doneButton.interactable = true;
+
+    }
+
+    public void startTimerButtonPress()
+    {
+        StartCoroutine(TimerHelper(Int16.Parse(CurrentExerciseAmount.text)));
+    }
+ 
 
     public void DoneButton()
     {
         Debug.Log("Done button");
         if (!circuitComplete)
         {
-            progressor.SetValue((float)circuitOrder / (float)circuitCount);
+            circuitProgressor.SetValue((float)circuitOrder / (float)circuitCount);
             Debug.Log((((float)circuitOrder) / (float)circuitCount));
 
             circuitOrder++;
@@ -103,6 +132,20 @@ public class CircuitController : MonoBehaviour
                 dataService.AddExerciseLogEntry(DateTime.Now.ToString(), CurrentExerciseName.text, CurrentExerciseAmount.text);
                 CurrentExerciseName.text = dataService.GetExerciseName(circuitOrder);
                 CurrentExerciseAmount.text = dataService.GetExerciseAmount(circuitOrder);
+
+                if (dataService.GetExerciseType(circuitOrder) == "time")
+                {
+                    startTimerButton.SetActive(true);
+                    doneButton.interactable = false;
+                }
+                else
+                {
+                    startTimerButton.SetActive(false);
+                    countdownTimer.SetActive(false);
+                    doneButton.interactable = true;
+
+                }
+
             }
             else
             {
