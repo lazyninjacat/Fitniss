@@ -3,6 +3,7 @@ using Doozy.Engine.Progress;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,10 +19,10 @@ public class CircuitController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI confirmLoadPresetText;
     [SerializeField] TextMeshProUGUI currentPresetText;
+    [SerializeField] Button doneButton;
 
-    [SerializeField] GameObject startTimerButton;
+
     [SerializeField] GameObject countdownTimer;
-
 
 
 
@@ -45,8 +46,6 @@ public class CircuitController : MonoBehaviour
     {
         circuitComplete = false;
         circuitProgress = 0;
-        startTimerButton.SetActive(false);
-        countdownTimer.SetActive(false);
 
         if (selectedCircuitPreset == null || selectedCircuitPreset == "")
         {
@@ -56,7 +55,7 @@ public class CircuitController : MonoBehaviour
 
         graphcontroller = FindObjectOfType<GraphController>();
         dataService = StartupScript.ds;
-        circuitOrder = 1;
+        circuitOrder = 0;
         circuitCount = dataService.GetCircuitCount();
         CurrentExerciseName.text = dataService.GetExerciseName(circuitOrder);
         CurrentExerciseAmount.text = dataService.GetExerciseAmount(circuitOrder);
@@ -69,6 +68,13 @@ public class CircuitController : MonoBehaviour
         circuitOrder = 1;
         CurrentExerciseName.text = dataService.GetExerciseName(circuitOrder);
         CurrentExerciseAmount.text = dataService.GetExerciseAmount(circuitOrder);
+
+        if (dataService.GetExerciseType(circuitOrder) == "time")
+        {
+            doneButton.interactable = false;
+            StartTimer();
+        }
+
     }
 
     public void ConfirmLoadPresetButton()
@@ -91,41 +97,47 @@ public class CircuitController : MonoBehaviour
         SceneManager.LoadScene("MediaDemo");
     }
 
-    [SerializeField] Button doneButton;
 
     private IEnumerator TimerHelper(int minutes)
     {
-        startTimerButton.SetActive(false);
+        Debug.Log("timer helper");
+        CurrentExerciseAmount.text = minutes + " min";
         countdownTimer.SetActive(true);
-        CurrentExerciseAmount.text = minutes + " minutes";
+        timeProgressor.SetValue(0);
+
 
         int seconds = minutes * 60;
 
         for (int i = 1; i <= seconds; i++)
         {            
             yield return new WaitForSeconds(1);
-            timeProgressor.SetValue(i / seconds);
+            timeProgressor.SetValue(i / (float)seconds);
+            CurrentExerciseAmount.text = (seconds - i) + " seconds";
+
         }
+
+        countdownTimer.SetActive(false);
 
         doneButton.interactable = true;
 
     }
 
-    public void startTimerButtonPress()
+    public void StartTimer()
     {
         StartCoroutine(TimerHelper(Int16.Parse(CurrentExerciseAmount.text)));
     }
  
-
+    
     public void DoneButton()
     {
         Debug.Log("Done button");
         if (!circuitComplete)
         {
+            circuitOrder++;
+
             circuitProgressor.SetValue((float)circuitOrder / (float)circuitCount);
             Debug.Log((((float)circuitOrder) / (float)circuitCount));
 
-            circuitOrder++;
 
             if (circuitOrder <= circuitCount)
             {
@@ -135,12 +147,14 @@ public class CircuitController : MonoBehaviour
 
                 if (dataService.GetExerciseType(circuitOrder) == "time")
                 {
-                    startTimerButton.SetActive(true);
+                    Debug.Log("timed");
                     doneButton.interactable = false;
+                    StartTimer();
                 }
                 else
                 {
-                    startTimerButton.SetActive(false);
+                    Debug.Log("not timed");
+
                     countdownTimer.SetActive(false);
                     doneButton.interactable = true;
 
