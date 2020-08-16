@@ -127,7 +127,7 @@ MonoBehaviour:
     m_Right: 5
     m_Top: 5
     m_Bottom: 5
-  loop: 1
+  loop: 0
   loopWhileDragging: 1
   maxVelocity: 0
   scrollbarVisibility: 0
