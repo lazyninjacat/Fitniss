@@ -155,7 +155,7 @@ public class LogController : MonoBehaviour
         recordID = DateTime.Now.ToString();
         picID = recordID.Replace(":", "").Replace("/", "").Replace(" ", "");
 
-        if (dataService.AddUserLogEntry(recordID, currentWeight, currentWaist) == 1)
+        if (dataService.AddUserLogEntry(DateTime.Now, currentWeight, currentWaist) == 1)
         {
             Debug.Log("*********************************************Userlog Added");
         }

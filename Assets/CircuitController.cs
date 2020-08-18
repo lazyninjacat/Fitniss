@@ -136,12 +136,11 @@ public class CircuitController : MonoBehaviour
             circuitOrder++;
 
             circuitProgressor.SetValue((float)circuitOrder / (float)circuitCount);
-            Debug.Log((((float)circuitOrder) / (float)circuitCount));
-
+            timeProgressor.SetValue(0);
 
             if (circuitOrder <= circuitCount)
             {
-                dataService.AddExerciseLogEntry(DateTime.Now.ToString(), CurrentExerciseName.text, CurrentExerciseAmount.text);
+                dataService.AddExerciseLogEntry(DateTime.Now, CurrentExerciseName.text, dataService.GetExerciseAmount(circuitOrder - 1), dataService.GetExerciseType(circuitOrder - 1));
                 CurrentExerciseName.text = dataService.GetExerciseName(circuitOrder);
                 CurrentExerciseAmount.text = dataService.GetExerciseAmount(circuitOrder);
 

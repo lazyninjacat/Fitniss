@@ -138,18 +138,19 @@ public class DataService  {
 
     }
 
-    public int AddUserLogEntry(string dateStr, float weight, float waist)
+    public int AddUserLogEntry(DateTime dateTime, float weight, float waist)
     {
         Debug.Log("**********************************Dataservice add user log entry");
-        string query = "INSERT INTO UserLog (Timestamp, Weight, Waist) VALUES(?, ?, ?)";
-        return _connection.Execute(query, dateStr, weight, waist);
+        string query = "INSERT INTO UserLog (DateTime, Weight, Waist) VALUES(?, ?, ?)";
+        return _connection.Execute(query, dateTime, weight, waist);
     }
 
-    public int AddExerciseLogEntry(string dateStr, string exName, string exAmount)
+    public int AddExerciseLogEntry(DateTime dateTime, string exName, string exAmount, string exType)
     {
-        string query = "INSERT INTO ExerciseLog (Timestamp, ExerciseName, ExerciseAmount) VALUES(?,?,?)";
-        return _connection.Execute(query, dateStr, exName, exAmount);
+        string query = "INSERT INTO ExerciseLog (DateTime, ExerciseName, ExerciseAmount, ExerciseType) VALUES(?,?,?,?)";
+        return _connection.Execute(query, dateTime, exName, exAmount, exType);
     }
+
 
 }
 
