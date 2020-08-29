@@ -31,6 +31,8 @@ public class CircuitController : MonoBehaviour
 
     private DataService dataService;
 
+    private string currentCircuit;
+
     private int circuitCount;
 
     private bool circuitComplete;
@@ -39,37 +41,49 @@ public class CircuitController : MonoBehaviour
 
     private string selectedCircuitPreset;
 
+    private int duration;
+
+    private DateTime startTime;
+    private DateTime endTime;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        dataService = StartupScript.ds;
+        currentCircuit = dataService.GetCurrentCircuit();
         circuitComplete = false;
         circuitProgress = 0;
 
-        if (selectedCircuitPreset == null || selectedCircuitPreset == "")
-        {
-            currentPresetText.text = "Current Preset: Default";
-
-        }
+        currentPresetText.text = currentCircuit;
 
         graphcontroller = FindObjectOfType<GraphController>();
-        dataService = StartupScript.ds;
         circuitOrder = 0;
         circuitCount = dataService.GetCircuitCount();
-        CurrentExerciseName.text = dataService.GetExerciseName(circuitOrder);
-        CurrentExerciseAmount.text = dataService.GetExerciseAmount(circuitOrder);
-   
+        CurrentExerciseName.text = dataService.GetExerciseName(currentCircuit, circuitOrder);
+        CurrentExerciseAmount.text = dataService.GetExerciseAmount(currentCircuit, circuitOrder);
+
+        startTime = new DateTime();
+        endTime = new DateTime();
+
+
     }
+
+
 
     public void StartButton()
     {
         circuitComplete = false;
         circuitOrder = 1;
-        CurrentExerciseName.text = dataService.GetExerciseName(circuitOrder);
-        CurrentExerciseAmount.text = dataService.GetExerciseAmount(circuitOrder);
+        CurrentExerciseName.text = dataService.GetExerciseName(currentCircuit, circuitOrder);
+        CurrentExerciseAmount.text = dataService.GetExerciseAmount(currentCircuit, circuitOrder);
 
-        if (dataService.GetExerciseType(circuitOrder) == "time")
+        startTime = new DateTime();
+        startTime = DateTime.Now;
+
+        if (dataService.GetExerciseType(currentCircuit, circuitOrder) == "time")
         {
             doneButton.interactable = false;
             StartTimer();
@@ -79,8 +93,15 @@ public class CircuitController : MonoBehaviour
 
     public void ConfirmLoadPresetButton()
     {
-        currentPresetText.text = "Current Preset: " + selectedCircuitPreset;
-        Debug.Log("Loading preset " + selectedCircuitPreset);
+        if (dataService.UpdateCurrentCircuit(selectedCircuitPreset) == 1)
+        {
+            currentPresetText.text = "Current Preset: " + selectedCircuitPreset;
+            Debug.Log("Loading preset " + selectedCircuitPreset);
+            currentCircuit = selectedCircuitPreset;
+        }
+
+   
+
     }
 
     public void LoadPresetButton(string presetName)
@@ -90,12 +111,6 @@ public class CircuitController : MonoBehaviour
         Debug.Log("Preset staged: " + selectedCircuitPreset);
     }
 
-   
-
-    public void TestSceneButton()
-    {
-        SceneManager.LoadScene("MediaDemo");
-    }
 
 
     private IEnumerator TimerHelper(int minutes)
@@ -104,7 +119,6 @@ public class CircuitController : MonoBehaviour
         CurrentExerciseAmount.text = minutes + " min";
         countdownTimer.SetActive(true);
         timeProgressor.SetValue(0);
-
 
         int seconds = minutes * 60;
 
@@ -140,11 +154,10 @@ public class CircuitController : MonoBehaviour
 
             if (circuitOrder <= circuitCount)
             {
-                dataService.AddExerciseLogEntry(DateTime.Now, CurrentExerciseName.text, dataService.GetExerciseAmount(circuitOrder - 1), dataService.GetExerciseType(circuitOrder - 1));
-                CurrentExerciseName.text = dataService.GetExerciseName(circuitOrder);
-                CurrentExerciseAmount.text = dataService.GetExerciseAmount(circuitOrder);
+                CurrentExerciseName.text = dataService.GetExerciseName(currentCircuit, circuitOrder);
+                CurrentExerciseAmount.text = dataService.GetExerciseAmount(currentCircuit, circuitOrder);
 
-                if (dataService.GetExerciseType(circuitOrder) == "time")
+                if (dataService.GetExerciseType(currentCircuit, circuitOrder) == "time")
                 {
                     Debug.Log("timed");
                     doneButton.interactable = false;
@@ -156,15 +169,18 @@ public class CircuitController : MonoBehaviour
 
                     countdownTimer.SetActive(false);
                     doneButton.interactable = true;
-
                 }
-
             }
             else
             {
+                endTime = DateTime.Now;
+                duration = endTime.Minute - startTime.Minute;
+                Debug.Log("Duration = " + duration);
+                dataService.AddExerciseLogEntry(DateTime.Now, currentCircuit, duration);
                 CurrentExerciseName.text = "Complete!!!";
                 CurrentExerciseAmount.text = "";
                 circuitComplete = true;
+            
             }
         }
         else
@@ -172,19 +188,5 @@ public class CircuitController : MonoBehaviour
             graphcontroller.GoToNodeByName("StartMenu");
         }     
     }
-
-
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
 
 }

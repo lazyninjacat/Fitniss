@@ -10,22 +10,20 @@ public class PresetScrollerController : MonoBehaviour, IEnhancedScrollerDelegate
     public EnhancedScroller presetScroller;
     public PresetCellView presetCellViewPrefab;
 
+    private DataService dataService;
+
 	void Start () 
     {
+        
+        dataService = StartupScript.ds;
         _data = new List<PresetScrollerData >();
 
-        _data.Add(new PresetScrollerData () { presetName = "Lion" });
-        _data.Add(new PresetScrollerData () { presetName = "Bear" });
-        _data.Add(new PresetScrollerData () { presetName = "Eagle" });
-        _data.Add(new PresetScrollerData () { presetName = "Dolphin" });
-        _data.Add(new PresetScrollerData () { presetName = "Ant" });
-        _data.Add(new PresetScrollerData () { presetName = "Cat" });
-        _data.Add(new PresetScrollerData () { presetName = "Sparrow" });
-        _data.Add(new PresetScrollerData () { presetName = "Dog" });
-        _data.Add(new PresetScrollerData () { presetName = "Spider" });
-        _data.Add(new PresetScrollerData () { presetName = "Elephant" });
-        _data.Add(new PresetScrollerData () { presetName = "Falcon" });
-        _data.Add(new PresetScrollerData () { presetName = "Mouse" });
+        foreach (var row in dataService.GetCircuitsTable())
+        {
+            _data.Add(new PresetScrollerData() { presetName = row.CircuitName });
+        }
+
+
 
         presetScroller.Delegate = this;
         presetScroller.ReloadData();

@@ -87,22 +87,42 @@ public class DataService  {
         return _connection.Table<Config>();
     }
 
-    public string GetExerciseName(int orderID)
+    public IEnumerable<Circuits> GetCircuitsTable()
     {
-        string query = "SELECT ExerciseName FROM Circuit WHERE OrderID = ?";
-        return _connection.ExecuteScalar<string>(query, orderID);
+        return _connection.Table<Circuits>();
     }
 
-    public string GetExerciseAmount(int orderID)
+    public string GetExerciseName(string circuitName, int orderID)
     {
-        string query = "SELECT ExerciseAmount FROM Circuit WHERE OrderID = ?";
-        return _connection.ExecuteScalar<string>(query, orderID);
+        string circuitTable = GetCircuitTableName(circuitName);
+        string query = "SELECT ExerciseName FROM ? WHERE OrderID = ?";
+        return _connection.ExecuteScalar<string>(query, circuitTable, orderID);
     }
 
-    public string GetExerciseType(int orderID)
+    public string GetExerciseAmount(string circuitName, int orderID)
     {
-        string query = "SELECT Type FROM Circuit WHERE OrderID = ?";
-        return _connection.ExecuteScalar<string>(query, orderID);
+        string circuitTable = GetCircuitTableName(circuitName);
+        string query = "SELECT ExerciseAmount FROM ? WHERE OrderID = ?";
+        return _connection.ExecuteScalar<string>(query, circuitTable, orderID);
+    }
+
+    public string GetExerciseType(string circuitName, int orderID)
+    {
+        string circuitTable = GetCircuitTableName(circuitName);
+        string query = "SELECT Type FROM ? WHERE OrderID = ?";
+        return _connection.ExecuteScalar<string>(query, circuitTable, orderID);
+    }
+
+    public string GetCircuitTableName(string circuitName)
+    {
+        string query = "SELECT TableName FROM Circuits WHERE CircuitName = ?";
+        return _connection.ExecuteScalar<string>(query, circuitName);
+    }
+
+    public string GetCurrentCircuit()
+    {
+        string query = "SELECT CurrentCircuit FROM Config WHERE ID = 1";
+        return _connection.ExecuteScalar<string>(query);
     }
 
     public IEnumerable<UserLog> GetWeightHistory()
@@ -124,7 +144,13 @@ public class DataService  {
 
     public int GetPresetCount()
     {
-        return _connection.Table<CircuitPreset>().Count();
+        return _connection.Table<Circuits>().Count();
+    }
+
+    public int UpdateCurrentCircuit(string circuitName)
+    {
+        string cmd = "UPDATE Config SET CurrentCircuit = ? WHERE ID = 1";
+        return _connection.Execute(cmd, circuitName);
     }
 
 
@@ -141,14 +167,14 @@ public class DataService  {
     public int AddUserLogEntry(DateTime dateTime, float weight, float waist)
     {
         Debug.Log("**********************************Dataservice add user log entry");
-        string query = "INSERT INTO UserLog (DateTime, Weight, Waist) VALUES(?, ?, ?)";
-        return _connection.Execute(query, dateTime, weight, waist);
+        string cmd = "INSERT INTO UserLog (DateTime, Weight, Waist) VALUES(?, ?, ?)";
+        return _connection.Execute(cmd, dateTime, weight, waist);
     }
 
-    public int AddExerciseLogEntry(DateTime dateTime, string exName, string exAmount, string exType)
+    public int AddExerciseLogEntry(DateTime dateTime, string circuitName, int durationMinutes)
     {
-        string query = "INSERT INTO ExerciseLog (DateTime, ExerciseName, ExerciseAmount, ExerciseType) VALUES(?,?,?,?)";
-        return _connection.Execute(query, dateTime, exName, exAmount, exType);
+        string cmd = "INSERT INTO ExerciseLog (DateTime, CircuitName, Duration) VALUES(?,?,?)";
+        return _connection.Execute(cmd, dateTime, circuitName, durationMinutes);
     }
 
 
