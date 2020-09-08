@@ -77,10 +77,7 @@ public class DataService  {
 		return _connection.Table<UserLog>();
 	}
 
-    public IEnumerable<Circuit> GetCircuitTable()
-    {
-        return _connection.Table<Circuit>();
-    }
+
 
     public IEnumerable<Config> GetConfigTable()
     {
@@ -89,33 +86,39 @@ public class DataService  {
 
     public IEnumerable<Circuits> GetCircuitsTable()
     {
+
         return _connection.Table<Circuits>();
     }
 
     public string GetExerciseName(string circuitName, int orderID)
     {
         string circuitTable = GetCircuitTableName(circuitName);
-        string query = "SELECT ExerciseName FROM ? WHERE OrderID = ?";
-        return _connection.ExecuteScalar<string>(query, circuitTable, orderID);
+        Debug.Log("circuitTable = " + circuitTable + ". circuitName = " + circuitName + ". orderID = " +orderID);
+        string query = "SELECT ExerciseName FROM " + circuitTable + " WHERE OrderID = ?";
+        return _connection.ExecuteScalar<string>(query, orderID);
     }
 
     public string GetExerciseAmount(string circuitName, int orderID)
     {
         string circuitTable = GetCircuitTableName(circuitName);
-        string query = "SELECT ExerciseAmount FROM ? WHERE OrderID = ?";
-        return _connection.ExecuteScalar<string>(query, circuitTable, orderID);
+        Debug.Log("circuitTable = " + circuitTable);
+
+        string query = "SELECT ExerciseAmount FROM " + circuitTable + " WHERE OrderID = ?";
+        return _connection.ExecuteScalar<string>(query, orderID);
     }
 
     public string GetExerciseType(string circuitName, int orderID)
     {
         string circuitTable = GetCircuitTableName(circuitName);
-        string query = "SELECT Type FROM ? WHERE OrderID = ?";
-        return _connection.ExecuteScalar<string>(query, circuitTable, orderID);
+        string query = "SELECT ExerciseType FROM " + circuitTable + " WHERE OrderID = ?";
+        return _connection.ExecuteScalar<string>(query, orderID);
     }
 
     public string GetCircuitTableName(string circuitName)
     {
+        Debug.Log("Getting circuit table name from circuitName: " + circuitName);
         string query = "SELECT TableName FROM Circuits WHERE CircuitName = ?";
+
         return _connection.ExecuteScalar<string>(query, circuitName);
     }
 
@@ -127,7 +130,7 @@ public class DataService  {
 
     public IEnumerable<UserLog> GetWeightHistory()
     {
-        string query = "SELECT Timestamp, Weight FROM UserLog";
+        string query = "SELECT DateTime, Weight FROM UserLog";
         return _connection.Query<UserLog>(query);
     }
 
@@ -137,9 +140,11 @@ public class DataService  {
         return _connection.Query<UserLog>(query);
     }
 
-    public int GetCircuitCount()
+    public int GetCurrentCircuitCount(string circuitName)
     {
-        return _connection.Table<Circuit>().Count();
+        string currentCircuitTable = GetCircuitTableName(circuitName);
+        string query = "SELECT COUNT (*) FROM " + currentCircuitTable;
+        return _connection.ExecuteScalar<int>(query);
     }
 
     public int GetPresetCount()

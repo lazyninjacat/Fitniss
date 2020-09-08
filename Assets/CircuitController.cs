@@ -61,7 +61,7 @@ public class CircuitController : MonoBehaviour
 
         graphcontroller = FindObjectOfType<GraphController>();
         circuitOrder = 0;
-        circuitCount = dataService.GetCircuitCount();
+        circuitCount = dataService.GetCurrentCircuitCount(currentCircuit);
         CurrentExerciseName.text = dataService.GetExerciseName(currentCircuit, circuitOrder);
         CurrentExerciseAmount.text = dataService.GetExerciseAmount(currentCircuit, circuitOrder);
 
