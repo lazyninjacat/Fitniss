@@ -5,6 +5,7 @@ using EnhancedUI.EnhancedScroller;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// This example shows how to simulate a grid with a fixed number of cells per row
@@ -31,7 +32,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
     /// </summary>
     public EnhancedScrollerCellView cellViewPrefab;
 
-    public int numberOfCellsPerRow = 3;
+    public int numberOfCellsPerRow = 7;
 
     private DataService dataService;
 
@@ -58,19 +59,8 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         
 
 
-    private void SetupDategridData()
-    {
-        
-
-
-
-        foreach (var row in dataService.GetExerciseLogTable())
-        {
-
-        }
-    }
-
-
+ 
+  
     /// <summary>
     /// Populates the data with a lot of records
     /// </summary>
@@ -82,42 +72,116 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
 
         Dictionary<string, bool> calendarMap = new Dictionary<string, bool>();
 
+        // add all the days backward 364 days from today
 
-        // add all the days backward 90 days from today
-        for (int i = 89; i > 0; i--)
+        int tempInt = 0;
+        if (today.DayOfWeek == DayOfWeek.Sunday)
         {
-            calendarMap.Add(today.AddDays(i * (-1)).ToShortDateString(), false);
+            tempInt = 6;
+        }
+        else if (today.DayOfWeek == DayOfWeek.Monday)
+        {
+            tempInt = 5;
+        }
+        else if (today.DayOfWeek == DayOfWeek.Tuesday)
+        {
+            tempInt = 4;
+        }
+        else if (today.DayOfWeek == DayOfWeek.Wednesday)
+        {
+            tempInt = 3;
+        }
+        else if (today.DayOfWeek == DayOfWeek.Thursday)
+        {
+            tempInt = 2;        
+        }
+        else if (today.DayOfWeek == DayOfWeek.Friday)
+        {
+            tempInt = 1;
+        }
+        else if (today.DayOfWeek == DayOfWeek.Saturday)
+        {
+            tempInt = 0;
         }
 
-        calendarMap.Add(today.Date.ToShortDateString(), false);
+
+        for (int i = 364 - tempInt; i > 0; i--)
+        {         
+            if (i > 1)
+            {
+                calendarMap.Add(today.AddDays(i * (-1)).ToShortDateString(), false);             
+            }
+            else if (i == 1)
+            {
+                calendarMap.Add(today.Date.ToShortDateString(), false);          
+            }
+        }
 
 
-
-
-
-
-        Debug.Log("calendarMap count = " + calendarMap.Count);
+        if (today.DayOfWeek == DayOfWeek.Sunday)
+        {
+            Debug.Log("Sunday");
+            for (int i = 1; i < 7; i++)
+            {
+                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+            }
+        }
+        else if (today.DayOfWeek == DayOfWeek.Monday)
+        {
+            Debug.Log("Monday");
+            for (int i = 1; i < 6; i++)
+            {
+                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+            }
+        }
+        else if (today.DayOfWeek == DayOfWeek.Tuesday)
+        {
+            Debug.Log("Tuesday");
+            for (int i = 1; i < 5; i++)
+            {
+                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+            }
+        }
+        else if (today.DayOfWeek == DayOfWeek.Wednesday)
+        {
+            Debug.Log("Wednesday");
+            for (int i = 1; i < 4; i++)
+            {
+                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+            }
+        }
+        else if (today.DayOfWeek == DayOfWeek.Thursday)
+        {
+            Debug.Log("Thursday");
+            for (int i = 1; i < 3; i++)
+            {
+                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+            }
+        }
+        else if (today.DayOfWeek == DayOfWeek.Friday)
+        {
+            calendarMap.Add(today.AddDays(1).ToShortDateString(), false);
+        }
 
         _data = new SmallList<DategridData>();
+
         foreach (var row in dataService.GetExerciseLogTable())
         {
-            Debug.Log("row timestamp = " + row.Timestamp);
             calendarMap[row.Timestamp] = true;
-            Debug.Log("Updating calendar map for " + row.Timestamp + ". Value is now: " + calendarMap[row.Timestamp]);
+            Debug.Log("Adding " + row.Timestamp);
         }
 
         foreach (var pair in calendarMap)
         {
-            _data.Add(new DategridData() { session = pair.Value });
-
-            Debug.Log("Adding " + pair.Key + " to data with a value of " + pair.Value);
-
-            if (pair.Value == true)
+            if (pair.Key == today.AddDays(1).ToShortDateString() || pair.Key == today.AddDays(2).ToShortDateString() || pair.Key == today.AddDays(3).ToShortDateString() || pair.Key == today.AddDays(4).ToShortDateString() || pair.Key == today.AddDays(5).ToShortDateString() || pair.Key == today.AddDays(6).ToShortDateString())
             {
-                Debug.Log("***************************************");
+                _data.Add(new DategridData() { session = false, future = true, date = pair.Key });
+            }
+            else
+            {
+                _data.Add(new DategridData() { session = pair.Value, future = false, date = pair.Key });
             }
         }
-
 
         // tell the scroller to reload now that we have the data
         scroller.ReloadData();

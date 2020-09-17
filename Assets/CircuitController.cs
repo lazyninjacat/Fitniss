@@ -1,5 +1,6 @@
 ﻿using Doozy.Engine.Nody;
 using Doozy.Engine.Progress;
+using EnhancedUI.EnhancedScroller;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ public class CircuitController : MonoBehaviour
 
     [SerializeField] GameObject countdownTimer;
 
+    [SerializeField] EnhancedScroller dategridScrollRect;
 
 
     private GraphController graphcontroller;
@@ -68,7 +70,7 @@ public class CircuitController : MonoBehaviour
         startTime = new DateTime();
         endTime = new DateTime();
 
-
+        dategridScrollRect.ScrollPosition = 1030;
 
     }
 
@@ -100,9 +102,7 @@ public class CircuitController : MonoBehaviour
             Debug.Log("Loading preset " + selectedCircuitPreset);
             currentCircuit = selectedCircuitPreset;
         }
-
-   
-
+        
     }
 
     public void LoadPresetButton(string presetName)

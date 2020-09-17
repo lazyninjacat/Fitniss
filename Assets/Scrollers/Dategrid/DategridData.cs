@@ -5,4 +5,7 @@
 public class DategridData
 {
     public bool session;
+    public bool future;
+    public string score;
+    public string date;
 }
