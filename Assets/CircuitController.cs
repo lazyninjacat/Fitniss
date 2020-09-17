@@ -69,6 +69,7 @@ public class CircuitController : MonoBehaviour
         endTime = new DateTime();
 
 
+
     }
 
 
@@ -176,7 +177,7 @@ public class CircuitController : MonoBehaviour
                 endTime = DateTime.Now;
                 duration = endTime.Minute - startTime.Minute;
                 Debug.Log("Duration = " + duration);
-                dataService.AddExerciseLogEntry(DateTime.Now, currentCircuit, duration);
+                dataService.AddExerciseLogEntry(DateTime.Now.ToShortDateString(), currentCircuit, duration);
                 CurrentExerciseName.text = "Complete!!!";
                 CurrentExerciseAmount.text = "";
                 circuitComplete = true;

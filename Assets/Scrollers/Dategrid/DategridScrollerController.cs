@@ -80,29 +80,42 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
 
         DateTime today = DateTime.Today.Date;
 
-        Dictionary<DateTime, bool> calendarMap = new Dictionary<DateTime, bool>();
+        Dictionary<string, bool> calendarMap = new Dictionary<string, bool>();
 
-        calendarMap.Add(today, true);
 
-        for (int i = 1; i < 180; i++)
+        // add all the days backward 90 days from today
+        for (int i = 89; i > 0; i--)
         {
-            calendarMap.Add((today.AddDays(i)), false);
+            calendarMap.Add(today.AddDays(i * (-1)).ToShortDateString(), false);
         }
+
+        calendarMap.Add(today.Date.ToShortDateString(), false);
+
+
+
+
+
 
         Debug.Log("calendarMap count = " + calendarMap.Count);
 
         _data = new SmallList<DategridData>();
         foreach (var row in dataService.GetExerciseLogTable())
         {
-            calendarMap[row.Timestamp.Date] = true;
-            Debug.Log("found one");
-            Debug.Log(calendarMap[row.Timestamp.Date]);
+            Debug.Log("row timestamp = " + row.Timestamp);
+            calendarMap[row.Timestamp] = true;
+            Debug.Log("Updating calendar map for " + row.Timestamp + ". Value is now: " + calendarMap[row.Timestamp]);
         }
 
         foreach (var pair in calendarMap)
         {
             _data.Add(new DategridData() { session = pair.Value });
 
+            Debug.Log("Adding " + pair.Key + " to data with a value of " + pair.Value);
+
+            if (pair.Value == true)
+            {
+                Debug.Log("***************************************");
+            }
         }
 
 

@@ -176,10 +176,11 @@ public class DataService  {
         return _connection.Execute(cmd, dateTime, weight, waist);
     }
 
-    public int AddExerciseLogEntry(DateTime dateTime, string circuitName, int durationMinutes)
+    public int AddExerciseLogEntry(string date, string circuitName, int durationMinutes)
     {
         string cmd = "INSERT INTO ExerciseLog (DateTime, CircuitName, Duration) VALUES(?,?,?)";
-        return _connection.Execute(cmd, dateTime, circuitName, durationMinutes);
+        return _connection.Execute(cmd, date, circuitName, durationMinutes);
+        return _connection.Execute(cmd, date, circuitName, durationMinutes);
     }
 
 

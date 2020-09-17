@@ -1,17 +1,18 @@
 ﻿using SQLite4Unity3d;
 using System;
+using System.Dynamic;
 
 public class ExerciseLog
 {
-    [PrimaryKey]
-    public DateTime Timestamp { get; set; }
-    public string ExerciseName { get; set; }
-    public string ExerciseAmount { get; set; }
-    public string ExerciseType { get; set; }
+    [PrimaryKey, AutoIncrement]
+    public string ID { get; set; }
+    public string Timestamp { get; set; }
+    public string CircuitName { get; set; }
+    public string Duration { get; set; }
    
 
     public override string ToString()
     {
-        return string.Format("[ExerciseLog: Timestamp={0}, ExerciseName={1}, ExerciseAmount={2}, ExerciseType={3}]", Timestamp, ExerciseName, ExerciseAmount, ExerciseType);
+        return string.Format("[ExerciseLog: ID={0}, Timestamp={1}, CircuitName={2}, Duration={3}]", ID, Timestamp, CircuitName, Duration);
     }
 }
