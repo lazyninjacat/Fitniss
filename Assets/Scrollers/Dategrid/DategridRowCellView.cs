@@ -30,20 +30,18 @@ public class DategridRowCellView : MonoBehaviour
             if (data.session == true)
             {
                 dateBackgroundImage.color = new Color(0, 255, 0);
-                cellText.text = data.date;
-
-
+                cellText.text = "";
             }
             else
             {
                 dateBackgroundImage.color = new Color(10, 10, 10, 100);
-                cellText.text = data.date;
+                cellText.text = "";
             }
 
             if (data.future == true)
             {
                 dateBackgroundImage.color = new Color(1, 1, 1, 0);
-                cellText.text = data.date;
+                cellText.text = "";
             }
         }
     }

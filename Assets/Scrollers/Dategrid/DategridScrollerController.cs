@@ -36,6 +36,9 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
 
     private DataService dataService;
 
+    public EnhancedScroller.TweenType vScrollerTweenType = EnhancedScroller.TweenType.immediate;
+    public float vScrollerTweenTime = 0f;
+
     /// <summary>
     /// Be sure to set up your references to the scroller after the Awake function. The 
     /// scroller does some internal configuration in its own Awake function. If you need to
@@ -185,6 +188,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
 
         // tell the scroller to reload now that we have the data
         scroller.ReloadData();
+        scroller.JumpToDataIndex(400, 0, 0, true, vScrollerTweenType, vScrollerTweenTime, null, EnhancedScroller.LoopJumpDirectionEnum.Closest);
     }
 
     #region EnhancedScroller Handlers
