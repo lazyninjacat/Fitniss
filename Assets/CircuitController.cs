@@ -72,6 +72,34 @@ public class CircuitController : MonoBehaviour
 
         dategridScrollRect.ScrollPosition = 1030;
 
+        string currentUrl = "HTTPS://testing123.com";
+        if (!(currentUrl[4] == (char)115 || currentUrl[4] == (char)83))
+        {
+            Debug.Log(currentUrl + " is missing the " + (char)115 + " or the " + (char)83 + ". Instead it's actually a " + currentUrl[4]);
+            string tempstr = currentUrl.Insert(4, "s");
+            currentUrl = tempstr;
+            Debug.Log("Fixed it. testStr now = " + currentUrl);
+        }
+        else
+        {
+            Debug.Log("No probs. currentUrl is still = " + currentUrl);
+
+        }
+
+        string url2 = "http://matt.com";
+        if (!(url2[4] == (char)115 || url2[4] == (char)83))
+        {
+            Debug.Log(url2 + " is missing the " + (char)115 + " or the " + (char)83 + ". Instead it's actually a " + url2[4]);
+            string tempstr = url2.Insert(4, "s");
+            url2 = tempstr;
+            Debug.Log("Fixed it. url2 now = " + url2);
+        }
+        else
+        {
+            Debug.Log("No probs. url2 still = " + url2);
+
+        }
+
     }
 
 
