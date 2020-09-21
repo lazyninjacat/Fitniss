@@ -13,7 +13,7 @@ using System;
         public DategridRowCellView[] rowCellViews;
 
         /// <summary>
-        /// This function just takes the Demo data and displays it
+        /// This function just takes the DateGrid data and displays it
         /// </summary>
         /// <param name="data"></param>
         public void SetData(ref SmallList<DategridData> data, int startingIndex)

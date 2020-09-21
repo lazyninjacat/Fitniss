@@ -83,7 +83,9 @@ MonoBehaviour:
   scroller: {fileID: 744473192916187483}
   cellViewPrefab: {fileID: 2298440584411993206, guid: aff7ef33df4d64c40a399e3064e29c14,
     type: 3}
-  numberOfCellsPerRow: 7
+  numberOfCellsPerRow: 8
+  vScrollerTweenType: 0
+  vScrollerTweenTime: 0
 --- !u!1 &744473192916187478
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &744473192916187484
 CanvasRenderer:
@@ -148,8 +150,8 @@ MonoBehaviour:
   scrollDirection: 1
   spacing: 1
   padding:
-    m_Left: 10
-    m_Right: 10
+    m_Left: 5
+    m_Right: 5
     m_Top: 10
     m_Bottom: 10
   loop: 0
@@ -209,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5686275}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -425,6 +427,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2013726612079944694, guid: aff7ef33df4d64c40a399e3064e29c14,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013726612079944694, guid: aff7ef33df4d64c40a399e3064e29c14,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013726612079944694, guid: aff7ef33df4d64c40a399e3064e29c14,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2281392351714810277, guid: aff7ef33df4d64c40a399e3064e29c14,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -454,11 +471,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6094532063535030906, guid: aff7ef33df4d64c40a399e3064e29c14,
-        type: 3}
-      propertyPath: m_Spacing
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6883287540612509039, guid: aff7ef33df4d64c40a399e3064e29c14,
         type: 3}

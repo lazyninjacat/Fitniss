@@ -30,19 +30,106 @@ public class DategridRowCellView : MonoBehaviour
             if (data.session == true)
             {
                 dateBackgroundImage.color = new Color(0, 255, 0);
+                //int position = data.date.IndexOf("/");
+                //cellText.text = data.date.Substring(0, position);
                 cellText.text = "";
             }
             else
             {
                 dateBackgroundImage.color = new Color(10, 10, 10, 100);
+                //int position = data.date.IndexOf("/");
+                //cellText.text = data.date.Substring(0, position);
                 cellText.text = "";
+
             }
 
             if (data.future == true)
             {
                 dateBackgroundImage.color = new Color(1, 1, 1, 0);
+                //int position = data.date.IndexOf("/");
+                //cellText.text = data.date.Substring(0, position);
                 cellText.text = "";
+
             }
+
+            if (data.isMonthCell == true)
+            {
+                dateBackgroundImage.color = new Color(1, 1, 1, 0);
+                if (data.isFirst == "1")
+                {
+                    int position = data.date.IndexOf("/");
+                    cellText.text = GetMonthString(data.date.Substring(0, position));
+                }
+                else
+                {
+                    cellText.text = "";
+                }
+               
+                //cellText.text = data.score;
+
+            }
+
+            //if (data.date == DateTime.Today.ToShortDateString() && !data.isMonthCell)
+            //{
+            //    dateBackgroundImage.color = new Color(1, 0, 0, 1);
+            //    cellText.text = "";
+
+            //}
         }
     }
+
+    private string GetMonthString(string monthInt)
+    {
+        string tempStr = "";
+        if (monthInt == "1")
+        {
+            tempStr = "Jan";
+        }
+        else if (monthInt == "2")
+        {
+            tempStr = "Feb";
+        }
+        else if (monthInt == "3")
+        {
+            tempStr = "Mar";
+        }
+        else if (monthInt == "4")
+        {
+            tempStr = "Apr";
+        }
+        else if (monthInt == "5")
+        {
+            tempStr = "May";
+        }
+        else if (monthInt == "6")
+        {
+            tempStr = "Jun";
+        }
+        else if (monthInt == "7")
+        {
+            tempStr = "Jul";
+        }
+        else if (monthInt == "8")
+        {
+            tempStr = "Aug";
+        }
+        else if (monthInt == "9")
+        {
+            tempStr = "Sep";
+        }
+        else if (monthInt == "10")
+        {
+            tempStr = "Oct";
+        }
+        else if (monthInt == "11")
+        {
+            tempStr = "Nov";
+        }
+        else if (monthInt == "12")
+        {
+            tempStr = "Dec";
+        }
+        return tempStr;
+    }
+
 }

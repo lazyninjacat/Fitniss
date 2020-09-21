@@ -8,4 +8,6 @@ public class DategridData
     public bool future;
     public string score;
     public string date;
+    public bool isMonthCell = false;
+    public string isFirst;
 }
