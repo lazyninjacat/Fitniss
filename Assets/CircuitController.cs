@@ -17,36 +17,24 @@ public class CircuitController : MonoBehaviour
     [SerializeField] TextMeshProUGUI CurrentExerciseAmount;
     [SerializeField] Progressor circuitProgressor;
     [SerializeField] Progressor timeProgressor;
-
     [SerializeField] TextMeshProUGUI confirmLoadPresetText;
     [SerializeField] TextMeshProUGUI currentPresetText;
     [SerializeField] Button doneButton;
-
-
     [SerializeField] GameObject countdownTimer;
-
     [SerializeField] EnhancedScroller dategridScrollRect;
+    [SerializeField] TextMeshProUGUI debugText;
 
-
-    private GraphController graphcontroller;
-    private int circuitOrder;
-
-    private DataService dataService;
-
-    private string currentCircuit;
-
-    private int circuitCount;
-
-    private bool circuitComplete;
-
-    private float circuitProgress;
-
-    private string selectedCircuitPreset;
-
-    private int duration;
-
-    private DateTime startTime;
-    private DateTime endTime;
+    private int _duration;
+    private int _circuitOrder;
+    private int _circuitCount;
+    private string _selectedCircuitPreset;
+    private string _currentCircuit;
+    private bool _circuitComplete;
+    private float _circuitProgress;
+    private DateTime _startTime;
+    private DateTime _endTime;
+    private GraphController _graphcontroller;
+    private DataService _dataService;
 
 
 
@@ -54,51 +42,24 @@ public class CircuitController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dataService = StartupScript.ds;
-        currentCircuit = dataService.GetCurrentCircuit();
-        circuitComplete = false;
-        circuitProgress = 0;
+        _dataService = StartupScript.ds;
+        _currentCircuit = _dataService.GetCurrentCircuit();
+        _circuitComplete = false;
+        _circuitProgress = 0;
 
-        currentPresetText.text = currentCircuit;
+        currentPresetText.text = _currentCircuit;
 
-        graphcontroller = FindObjectOfType<GraphController>();
-        circuitOrder = 0;
-        circuitCount = dataService.GetCurrentCircuitCount(currentCircuit);
-        CurrentExerciseName.text = dataService.GetExerciseName(currentCircuit, circuitOrder);
-        CurrentExerciseAmount.text = dataService.GetExerciseAmount(currentCircuit, circuitOrder);
+        _graphcontroller = FindObjectOfType<GraphController>();
+        _circuitOrder = 0;
+        _circuitCount = _dataService.GetCurrentCircuitCount(_currentCircuit);
+        CurrentExerciseName.text = _dataService.GetExerciseName(_currentCircuit, _circuitOrder);
+        CurrentExerciseAmount.text = _dataService.GetExerciseAmount(_currentCircuit, _circuitOrder);
 
-        startTime = new DateTime();
-        endTime = new DateTime();
+        _startTime = new DateTime();
+        _endTime = new DateTime();
 
         dategridScrollRect.ScrollPosition = 1030;
 
-        string currentUrl = "HTTPS://testing123.com";
-        if (!(currentUrl[4] == (char)115 || currentUrl[4] == (char)83))
-        {
-            Debug.Log(currentUrl + " is missing the " + (char)115 + " or the " + (char)83 + ". Instead it's actually a " + currentUrl[4]);
-            string tempstr = currentUrl.Insert(4, "s");
-            currentUrl = tempstr;
-            Debug.Log("Fixed it. testStr now = " + currentUrl);
-        }
-        else
-        {
-            Debug.Log("No probs. currentUrl is still = " + currentUrl);
-
-        }
-
-        string url2 = "http://matt.com";
-        if (!(url2[4] == (char)115 || url2[4] == (char)83))
-        {
-            Debug.Log(url2 + " is missing the " + (char)115 + " or the " + (char)83 + ". Instead it's actually a " + url2[4]);
-            string tempstr = url2.Insert(4, "s");
-            url2 = tempstr;
-            Debug.Log("Fixed it. url2 now = " + url2);
-        }
-        else
-        {
-            Debug.Log("No probs. url2 still = " + url2);
-
-        }
 
     }
 
@@ -106,40 +67,37 @@ public class CircuitController : MonoBehaviour
 
     public void StartButton()
     {
-        circuitComplete = false;
-        circuitOrder = 1;
-        CurrentExerciseName.text = dataService.GetExerciseName(currentCircuit, circuitOrder);
-        CurrentExerciseAmount.text = dataService.GetExerciseAmount(currentCircuit, circuitOrder);
+        _circuitComplete = false;
+        _circuitOrder = 1;
+        CurrentExerciseName.text = _dataService.GetExerciseName(_currentCircuit, _circuitOrder);
+        CurrentExerciseAmount.text = _dataService.GetExerciseAmount(_currentCircuit, _circuitOrder);
 
-        startTime = new DateTime();
-        startTime = DateTime.Now;
+        _startTime = new DateTime();
+        _startTime = DateTime.Now;
 
-        if (dataService.GetExerciseType(currentCircuit, circuitOrder) == "time")
+        if (_dataService.GetExerciseType(_currentCircuit, _circuitOrder) == "time")
         {
-            doneButton.interactable = false;
+            //doneButton.interactable = false;
             StartTimer();
         }
-
     }
 
     public void ConfirmLoadPresetButton()
     {
-        if (dataService.UpdateCurrentCircuit(selectedCircuitPreset) == 1)
+        if (_dataService.UpdateCurrentCircuit(_selectedCircuitPreset) == 1)
         {
-            currentPresetText.text = "Current Preset: " + selectedCircuitPreset;
-            Debug.Log("Loading preset " + selectedCircuitPreset);
-            currentCircuit = selectedCircuitPreset;
-        }
-        
+            currentPresetText.text = "Current Preset: " + _selectedCircuitPreset;
+            Debug.Log("Loading preset " + _selectedCircuitPreset);
+            _currentCircuit = _selectedCircuitPreset;
+        }        
     }
 
     public void LoadPresetButton(string presetName)
     {
-        selectedCircuitPreset = presetName;
-        confirmLoadPresetText.text = selectedCircuitPreset;
-        Debug.Log("Preset staged: " + selectedCircuitPreset);
+        _selectedCircuitPreset = presetName;
+        confirmLoadPresetText.text = _selectedCircuitPreset;
+        Debug.Log("Preset staged: " + _selectedCircuitPreset);
     }
-
 
 
     private IEnumerator TimerHelper(int minutes)
@@ -174,22 +132,22 @@ public class CircuitController : MonoBehaviour
     public void DoneButton()
     {
         Debug.Log("Done button");
-        if (!circuitComplete)
+        if (!_circuitComplete)
         {
-            circuitOrder++;
+            _circuitOrder++;
 
-            circuitProgressor.SetValue((float)circuitOrder / (float)circuitCount);
+            circuitProgressor.SetValue((float)_circuitOrder / (float)_circuitCount);
             timeProgressor.SetValue(0);
 
-            if (circuitOrder <= circuitCount)
+            if (_circuitOrder <= _circuitCount)
             {
-                CurrentExerciseName.text = dataService.GetExerciseName(currentCircuit, circuitOrder);
-                CurrentExerciseAmount.text = dataService.GetExerciseAmount(currentCircuit, circuitOrder);
+                CurrentExerciseName.text = _dataService.GetExerciseName(_currentCircuit, _circuitOrder);
+                CurrentExerciseAmount.text = _dataService.GetExerciseAmount(_currentCircuit, _circuitOrder);
 
-                if (dataService.GetExerciseType(currentCircuit, circuitOrder) == "time")
+                if (_dataService.GetExerciseType(_currentCircuit, _circuitOrder) == "time")
                 {
                     Debug.Log("timed");
-                    doneButton.interactable = false;
+                    //doneButton.interactable = false;
                     StartTimer();
                 }
                 else
@@ -202,20 +160,18 @@ public class CircuitController : MonoBehaviour
             }
             else
             {
-                endTime = DateTime.Now;
-                duration = endTime.Minute - startTime.Minute;
-                Debug.Log("Duration = " + duration);
-                dataService.AddExerciseLogEntry(DateTime.Now.ToShortDateString(), currentCircuit, duration);
+                _endTime = DateTime.Now;
+                _duration = _endTime.Minute - _startTime.Minute;
+                Debug.Log("Duration = " + _duration);
+                _dataService.AddExerciseLogEntry(DateTime.Today.Date, _currentCircuit, _duration);
                 CurrentExerciseName.text = "Complete!!!";
                 CurrentExerciseAmount.text = "";
-                circuitComplete = true;
-            
+                _circuitComplete = true;            
             }
         }
         else
         {
-            graphcontroller.GoToNodeByName("StartMenu");
+            _graphcontroller.GoToNodeByName("StartMenu");
         }     
     }
-
 }

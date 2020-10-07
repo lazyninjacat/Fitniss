@@ -169,17 +169,16 @@ public class DataService  {
 
     }
 
-    public int AddUserLogEntry(DateTime dateTime, float weight, float waist)
+    public int AddUserLogEntry(DateTime date, float weight, float waist)
     {
         Debug.Log("**********************************Dataservice add user log entry");
-        string cmd = "INSERT INTO UserLog (DateTime, Weight, Waist) VALUES(?, ?, ?)";
-        return _connection.Execute(cmd, dateTime, weight, waist);
+        string cmd = "INSERT INTO UserLog (Date, Weight, Waist) VALUES(?, ?, ?)";
+        return _connection.Execute(cmd, date, weight, waist);
     }
 
-    public int AddExerciseLogEntry(string date, string circuitName, int durationMinutes)
+    public int AddExerciseLogEntry(DateTime date, string circuitName, int durationMinutes)
     {
-        string cmd = "INSERT INTO ExerciseLog (DateTime, CircuitName, Duration) VALUES(?,?,?)";
-        return _connection.Execute(cmd, date, circuitName, durationMinutes);
+        string cmd = "INSERT INTO ExerciseLog (Date, CircuitName, Duration) VALUES(?,?,?)";
         return _connection.Execute(cmd, date, circuitName, durationMinutes);
     }
 

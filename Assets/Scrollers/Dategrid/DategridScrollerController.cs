@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using TMPro;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// This example shows how to simulate a grid with a fixed number of cells per row
@@ -40,6 +42,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
     public EnhancedScroller.TweenType vScrollerTweenType = EnhancedScroller.TweenType.immediate;
     public float vScrollerTweenTime = 0f;
 
+
     /// <summary>
     /// Be sure to set up your references to the scroller after the Awake function. The 
     /// scroller does some internal configuration in its own Awake function. If you need to
@@ -72,9 +75,10 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
     {
         // set up some simple data
 
+
         DateTime today = DateTime.Today.Date;
 
-        Dictionary<string, bool> calendarMap = new Dictionary<string, bool>();
+        Dictionary<DateTime, bool> calendarMap = new Dictionary<DateTime, bool>();
 
         // add all the days backward 364 days from today
 
@@ -113,11 +117,11 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         {         
             if (i >= 1)
             {
-                calendarMap.Add(today.AddDays(i * (-1)).ToShortDateString(), false);             
+                calendarMap.Add(today.AddDays(i * (-1)).Date, false);             
             }
             else if (i == 0)
             {
-                calendarMap.Add(today.Date.ToShortDateString(), false);          
+                calendarMap.Add(today.Date, false);          
             }
         }
 
@@ -127,7 +131,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             Debug.Log("Sunday");
             for (int i = 1; i < 7; i++)
             {
-                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+                calendarMap.Add(today.AddDays(i), false);
             }
         }
         else if (today.DayOfWeek == DayOfWeek.Monday)
@@ -135,7 +139,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             Debug.Log("Monday");
             for (int i = 1; i < 6; i++)
             {
-                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+                calendarMap.Add(today.AddDays(i), false);
             }
         }
         else if (today.DayOfWeek == DayOfWeek.Tuesday)
@@ -143,7 +147,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             Debug.Log("Tuesday");
             for (int i = 1; i < 5; i++)
             {
-                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+                calendarMap.Add(today.AddDays(i), false);
             }
         }
         else if (today.DayOfWeek == DayOfWeek.Wednesday)
@@ -151,7 +155,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             Debug.Log("Wednesday");
             for (int i = 1; i < 4; i++)
             {
-                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+                calendarMap.Add(today.AddDays(i), false);
             }
         }
         else if (today.DayOfWeek == DayOfWeek.Thursday)
@@ -159,7 +163,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             Debug.Log("Thursday");
             for (int i = 1; i < 3; i++)
             {
-                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+                calendarMap.Add(today.AddDays(i), false);
             }
         }
         else if (today.DayOfWeek == DayOfWeek.Friday)
@@ -167,7 +171,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             Debug.Log("Friday");
             for (int i = 1; i <2; i++)
             {
-                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+                calendarMap.Add(today.AddDays(i), false);
             }
         }
         else if (today.DayOfWeek == DayOfWeek.Saturday)
@@ -175,70 +179,80 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             Debug.Log("Saturday");
             for (int i = 1; i < 1; i++)
             {
-                calendarMap.Add(today.AddDays(i).ToShortDateString(), false);
+                calendarMap.Add(today.AddDays(i), false);
             }
         }
 
         foreach (var row in dataService.GetExerciseLogTable())
         {
-            calendarMap[row.Timestamp] = true;
-            Debug.Log("Setting exercise session at " + row.Timestamp + " to TRUE");
+            calendarMap[row.Date] = true;
         }
 
         _data = new SmallList<DategridData>();
 
-        string currentMonth = "";
-        string thisMonth = "";
+        int currentMonth;
+        int thisMonth;
 
 
-        _data.Add(new DategridData() { isMonthCell = true, date = today.Date.AddDays(-364).ToShortDateString(), isFirst = "1" });
+        _data.Add(new DategridData() { isMonthCell = true, date = today.Date.AddDays(-364), isFirst = "1" });
 
-        thisMonth = today.Date.AddDays(-364).ToShortDateString();
-        int position = thisMonth.IndexOf("/");
-        thisMonth = thisMonth.Substring(0, position);
+
+        thisMonth = today.Date.AddDays(-364).Month;
+
         currentMonth = thisMonth;
 
         int counter = 0;
 
-      
+
         foreach (var pair in calendarMap)
         {
+   
             if (counter == 7)
             {
-                thisMonth = pair.Key;
-                position = thisMonth.IndexOf("/");
-                thisMonth = thisMonth.Substring(0, position);
+                thisMonth = pair.Key.Month;
+                //if (thisMonth.Contains("/"))
+                //{
+                //    position = thisMonth.IndexOf("/");
+                //}
+                //else if (thisMonth.Contains("-"))
+                //{
+                //    position = thisMonth.IndexOf("-");
+                //}
+            
+
+
+                //thisMonth = thisMonth.Substring(0, position);
 
                 if (thisMonth == currentMonth)
                 {
-                    _data.Add(new DategridData() { isMonthCell = true, date = pair.Key, isFirst = "0" });
+                    _data.Add(new DategridData() { isMonthCell = true, date = pair.Key.Date, isFirst = "0" });
                 }
                 else
                 {
-                    _data.Add(new DategridData() { isMonthCell = true, date = pair.Key, isFirst = "1" });
+                    _data.Add(new DategridData() { isMonthCell = true, date = pair.Key.Date, isFirst = "1" });
                 }
 
                 currentMonth = thisMonth;
 
                 counter = 0;
-                Debug.Log("********** Added a Month Cell at date: " + pair.Key);
+                Debug.Log("********** Added a Month Cell at date: " + pair.Key.Date);
+                
 
-               
+
 
             }
 
-            if (pair.Key == today.AddDays(1).ToShortDateString() || pair.Key == today.AddDays(2).ToShortDateString() || pair.Key == today.AddDays(3).ToShortDateString() || pair.Key == today.AddDays(4).ToShortDateString() || pair.Key == today.AddDays(5).ToShortDateString() || pair.Key == today.AddDays(6).ToShortDateString())
+            if (pair.Key.Date == today.AddDays(1).Date || pair.Key.Date == today.AddDays(2).Date || pair.Key.Date == today.AddDays(3).Date || pair.Key.Date == today.AddDays(4).Date || pair.Key.Date == today.AddDays(5).Date || pair.Key.Date == today.AddDays(6).Date)
             {
-                _data.Add(new DategridData() { session = false, future = true, date = pair.Key });
+                _data.Add(new DategridData() { session = false, future = true, date = pair.Key.Date });
             }
             else
             {
-                _data.Add(new DategridData() { session = pair.Value, future = false, date = pair.Key });
+                _data.Add(new DategridData() { session = pair.Value, future = false, date = pair.Key.Date });
             }
             Debug.Log("* Added a calendar date cell at date: " + pair.Key);
 
             counter++;
-
         }
 
 
@@ -255,6 +269,9 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         // tell the scroller to reload now that we have the data
         scroller.ReloadData();
         scroller.JumpToDataIndex(400, 0, 0, true, vScrollerTweenType, vScrollerTweenTime, null, EnhancedScroller.LoopJumpDirectionEnum.Closest);
+
+       
+
     }
 
     #region EnhancedScroller Handlers

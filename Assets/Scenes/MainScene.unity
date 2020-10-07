@@ -11531,7 +11531,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.4
+  m_fontSize: 17
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17578,7 +17578,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 723595480}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999997
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -46915,6 +46915,7 @@ GameObject:
   - component: {fileID: 1129881440}
   - component: {fileID: 1129881442}
   - component: {fileID: 1129881441}
+  - component: {fileID: 1129881443}
   m_Layer: 0
   m_Name: UserLogSmall
   m_TagString: Untagged
@@ -46979,6 +46980,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129881439}
   m_CullTransparentMesh: 0
+--- !u!114 &1129881443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129881439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 15
+    m_Right: 15
+    m_Top: 15
+    m_Bottom: 15
+  m_ChildAlignment: 0
+  m_Spacing: 15
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1152368746
 GameObject:
   m_ObjectHideFlags: 0
@@ -47275,7 +47302,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266606684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d12bfc32d0d797428cf0191288caabd, type: 3}
   m_Name: 
@@ -49598,7 +49625,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1266606686}
   m_OnClick:
     m_PersistentCalls:
@@ -49993,7 +50020,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12.9
+  m_fontSize: 12
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -62774,6 +62801,7 @@ MonoBehaviour:
   doneButton: {fileID: 796227877}
   countdownTimer: {fileID: 1858244620}
   dategridScrollRect: {fileID: 1568954296}
+  debugText: {fileID: 0}
 --- !u!4 &2046205774
 Transform:
   m_ObjectHideFlags: 0
@@ -64202,6 +64230,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dategrid
       objectReference: {fileID: 0}
+    - target: {fileID: 744473192558360591, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: debugText1
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473192558360591, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: debugText2
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473192558360591, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: debugText3
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473192558360591, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: debugText4
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 744473192916187479, guid: a6e38fb487546a348960eb94b30ce3a4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -64210,22 +64258,57 @@ PrefabInstance:
     - target: {fileID: 744473192916187479, guid: a6e38fb487546a348960eb94b30ce3a4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -20
+      value: -20.000006
       objectReference: {fileID: 0}
-    - target: {fileID: 744473192916187481, guid: a6e38fb487546a348960eb94b30ce3a4,
+    - target: {fileID: 744473192916187482, guid: a6e38fb487546a348960eb94b30ce3a4,
         type: 3}
-      propertyPath: m_Color.a
-      value: 0.003921569
+      propertyPath: m_Vertical
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 744473192916187483, guid: a6e38fb487546a348960eb94b30ce3a4,
+    - target: {fileID: 744473192916187482, guid: a6e38fb487546a348960eb94b30ce3a4,
         type: 3}
-      propertyPath: padding.m_Left
-      value: 5
+      propertyPath: m_Horizontal
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 744473192916187483, guid: a6e38fb487546a348960eb94b30ce3a4,
+    - target: {fileID: 744473194138508585, guid: a6e38fb487546a348960eb94b30ce3a4,
         type: 3}
-      propertyPath: padding.m_Right
-      value: 5
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473194138508585, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473194138508585, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473194138508585, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473194138508585, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473194138508585, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 184
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473194138508585, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 198
+      objectReference: {fileID: 0}
+    - target: {fileID: 744473194138508585, guid: a6e38fb487546a348960eb94b30ce3a4,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1271941181189042095, guid: a6e38fb487546a348960eb94b30ce3a4,
         type: 3}

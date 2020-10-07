@@ -32,15 +32,14 @@ public class DategridRowCellView : MonoBehaviour
                 dateBackgroundImage.color = new Color(0, 255, 0);
                 //int position = data.date.IndexOf("/");
                 //cellText.text = data.date.Substring(0, position);
-                cellText.text = "";
+                cellText.text = data.date.Day.ToString();
             }
             else
             {
                 dateBackgroundImage.color = new Color(10, 10, 10, 100);
                 //int position = data.date.IndexOf("/");
                 //cellText.text = data.date.Substring(0, position);
-                cellText.text = "";
-
+                cellText.text = data.date.Day.ToString();
             }
 
             if (data.future == true)
@@ -49,7 +48,6 @@ public class DategridRowCellView : MonoBehaviour
                 //int position = data.date.IndexOf("/");
                 //cellText.text = data.date.Substring(0, position);
                 cellText.text = "";
-
             }
 
             if (data.isMonthCell == true)
@@ -57,8 +55,7 @@ public class DategridRowCellView : MonoBehaviour
                 dateBackgroundImage.color = new Color(1, 1, 1, 0);
                 if (data.isFirst == "1")
                 {
-                    int position = data.date.IndexOf("/");
-                    cellText.text = GetMonthString(data.date.Substring(0, position));
+                    cellText.text = GetMonthString(data.date.Month.ToString());
                 }
                 else
                 {
