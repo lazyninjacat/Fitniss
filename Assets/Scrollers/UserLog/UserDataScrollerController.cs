@@ -33,10 +33,10 @@ public class UserDataScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         {
             _data.Add(new UserDataScrollerData()
             {
-                timestamp = row.Timestamp,
+                timestamp = row.Date.ToString(),
                 weight = row.Weight,
                 waist = row.Waist
-            });
+            }); ;
         }
 
 

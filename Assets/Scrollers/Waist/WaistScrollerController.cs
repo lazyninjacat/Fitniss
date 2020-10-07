@@ -31,7 +31,7 @@ public class WaistScrollerController : MonoBehaviour, IEnhancedScrollerDelegate
         {
             _data.Add(new UserDataScrollerData()
             {
-                timestamp = row.Timestamp,
+                timestamp = row.Date.ToString(),
                 weight = row.Weight,
                 waist = row.Waist
             });

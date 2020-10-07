@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EnhancedUI.EnhancedScroller;
+using TMPro;
 
 public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
 {
@@ -9,6 +10,9 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
 
     public EnhancedScroller weightChartScroller;
     public WeightChartCellView weightChartCellViewPrefab;
+    [SerializeField] TextMeshProUGUI upperLimitText;
+    [SerializeField] TextMeshProUGUI lowerLimitText;
+
 
     private DataService dataService;
 
@@ -47,12 +51,16 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
 
         foreach (var row in dataService.GetUserLogTable())
         {        
-            _data.Add(new WeightChartCellData() { weightFloat = (row.Weight - lowerWeightLimit) / (upperWeightLimit - lowerWeightLimit) });
+            _data.Add(new WeightChartCellData() { fillBar = (row.Weight - lowerWeightLimit) / (upperWeightLimit - lowerWeightLimit), date = row.Date.Day, month = row.Date.Month, weight = (float)row.Weight });
+            Debug.Log("Timestamp = " + row.Date.ToString() + "Day = " + row.Date.Day.ToString() + ". Month = " + row.Date.Month.ToString() + ". Weight = " + row.Weight.ToString());
         }
 
 
         weightChartScroller.Delegate = this;
         weightChartScroller.ReloadData();
+
+        upperLimitText.text = upperWeightLimit.ToString();
+        lowerLimitText.text = lowerWeightLimit.ToString();
     }
 
     public int GetNumberOfCells(EnhancedScroller scroller)
@@ -62,7 +70,7 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
 
     public float GetCellViewSize(EnhancedScroller scroller, int dataIndex)
     {
-        return 10f;
+        return 20f;
     }
 
     public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int dataIndex, int cellIndex)

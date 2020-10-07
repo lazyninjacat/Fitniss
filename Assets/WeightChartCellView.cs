@@ -1,24 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using EnhancedUI.EnhancedScroller;
+using TMPro;
 
-/// <summary>
-/// This is the view of our cell which handles how the cell looks.
-/// </summary>
+
 public class WeightChartCellView : EnhancedScrollerCellView
 {
-    /// <summary>
-    /// A reference to the UI Text element to display the cell data
-    /// </summary>
     public Image weightBar;
+    public TextMeshProUGUI date;
+    public TextMeshProUGUI month;
+    public TextMeshProUGUI weightText;
 
-    /// <summary>
-    /// This function just takes the Demo data and displays it
-    /// </summary>
-    /// <param name="data"></param>
     public void SetData(WeightChartCellData data)
     {
         // update the UI text with the cell data
-        weightBar.fillAmount = data.weightFloat;
+        weightBar.fillAmount = data.fillBar;
+        date.text = data.date.ToString();
+        month.text = data.month.ToString();
+        weightText.text = data.weight.ToString();
+        Debug.Log("Weight = " + data.weight);
     }
 }

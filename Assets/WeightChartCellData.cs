@@ -3,5 +3,8 @@
 /// </summary>
 public class WeightChartCellData
 {
-    public float weightFloat;
+    public float fillBar;
+    public int date;
+    public int month;
+    public float weight;
 }

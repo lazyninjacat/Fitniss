@@ -173,7 +173,7 @@ public class DataService  {
     {
         Debug.Log("**********************************Dataservice add user log entry");
         string cmd = "INSERT INTO UserLog (Date, Weight, Waist) VALUES(?, ?, ?)";
-        return _connection.Execute(cmd, date, weight, waist);
+        return _connection.Execute(cmd, date.Date, weight, waist);
     }
 
     public int AddExerciseLogEntry(DateTime date, string circuitName, int durationMinutes)

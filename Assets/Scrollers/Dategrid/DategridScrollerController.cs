@@ -235,7 +235,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
                 currentMonth = thisMonth;
 
                 counter = 0;
-                Debug.Log("********** Added a Month Cell at date: " + pair.Key.Date);
+                //Debug.Log("********** Added a Month Cell at date: " + pair.Key.Date);
                 
 
 
@@ -250,7 +250,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             {
                 _data.Add(new DategridData() { session = pair.Value, future = false, date = pair.Key.Date });
             }
-            Debug.Log("* Added a calendar date cell at date: " + pair.Key);
+            //Debug.Log("* Added a calendar date cell at date: " + pair.Key);
 
             counter++;
         }
