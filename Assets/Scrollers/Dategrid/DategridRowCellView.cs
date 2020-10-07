@@ -30,23 +30,17 @@ public class DategridRowCellView : MonoBehaviour
             if (data.session == true)
             {
                 dateBackgroundImage.color = new Color(0, 255, 0);
-                //int position = data.date.IndexOf("/");
-                //cellText.text = data.date.Substring(0, position);
                 cellText.text = data.date.Day.ToString();
             }
             else
             {
                 dateBackgroundImage.color = new Color(10, 10, 10, 100);
-                //int position = data.date.IndexOf("/");
-                //cellText.text = data.date.Substring(0, position);
                 cellText.text = data.date.Day.ToString();
             }
 
             if (data.future == true)
             {
-                dateBackgroundImage.color = new Color(1, 1, 1, 0);
-                //int position = data.date.IndexOf("/");
-                //cellText.text = data.date.Substring(0, position);
+                dateBackgroundImage.color = new Color(1, 1, 1, 0);            
                 cellText.text = "";
             }
 
@@ -60,18 +54,8 @@ public class DategridRowCellView : MonoBehaviour
                 else
                 {
                     cellText.text = "";
-                }
-               
-                //cellText.text = data.score;
-
-            }
-
-            //if (data.date == DateTime.Today.ToShortDateString() && !data.isMonthCell)
-            //{
-            //    dateBackgroundImage.color = new Color(1, 0, 0, 1);
-            //    cellText.text = "";
-
-            //}
+                }               
+            }                       
         }
     }
 
@@ -80,19 +64,19 @@ public class DategridRowCellView : MonoBehaviour
         string tempStr = "";
         if (monthInt == "1")
         {
-            tempStr = "Jan";
+            tempStr = "January";
         }
         else if (monthInt == "2")
         {
-            tempStr = "Feb";
+            tempStr = "February";
         }
         else if (monthInt == "3")
         {
-            tempStr = "Mar";
+            tempStr = "March";
         }
         else if (monthInt == "4")
         {
-            tempStr = "Apr";
+            tempStr = "April";
         }
         else if (monthInt == "5")
         {
@@ -100,31 +84,31 @@ public class DategridRowCellView : MonoBehaviour
         }
         else if (monthInt == "6")
         {
-            tempStr = "Jun";
+            tempStr = "June";
         }
         else if (monthInt == "7")
         {
-            tempStr = "Jul";
+            tempStr = "July";
         }
         else if (monthInt == "8")
         {
-            tempStr = "Aug";
+            tempStr = "August";
         }
         else if (monthInt == "9")
         {
-            tempStr = "Sep";
+            tempStr = "September";
         }
         else if (monthInt == "10")
         {
-            tempStr = "Oct";
+            tempStr = "October";
         }
         else if (monthInt == "11")
         {
-            tempStr = "Nov";
+            tempStr = "November";
         }
         else if (monthInt == "12")
         {
-            tempStr = "Dec";
+            tempStr = "December";
         }
         return tempStr;
     }
