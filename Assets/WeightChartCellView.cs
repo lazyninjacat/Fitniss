@@ -26,7 +26,7 @@ public class WeightChartCellView : EnhancedScrollerCellView
             weightText.text = data.weight.ToString();
         }
 
-        Debug.Log("Weight = " + data.weight);
+        //Debug.Log("Weight = " + data.weight);
     }
 
     private string MonthString(int monthInt)

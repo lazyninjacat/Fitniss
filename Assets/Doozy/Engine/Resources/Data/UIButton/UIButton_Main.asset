@@ -26,7 +26,6 @@ MonoBehaviour:
   - LoadCircuitPreset
   - SaveRecord
   - TakePicture
-  - ExerciseLog
+  - WeightWaist
   - NewRecord
-  - UserLog
   - ViewHistory

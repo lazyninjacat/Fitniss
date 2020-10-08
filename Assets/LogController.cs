@@ -18,19 +18,17 @@ public class LogController : MonoBehaviour
     [SerializeField] Button saveButton;
 
 
-    [SerializeField] GameObject ExerciseDataPanelSmall;
-    [SerializeField] GameObject ExerciseDataPanelLarge;
-    [SerializeField] GameObject UserDataPanelSmall;
-    [SerializeField] GameObject UserDataPanelLarge;
+    [SerializeField] GameObject weightChart;
+    [SerializeField] GameObject waistChart;
   
 
-    private float currentWeight;
-    private float currentWaist;
-    private Texture2D CurrentTexture;
-    private string picID;
-    private GraphController graphcontroller;
-    private DataService dataService;
-    private string recordID;
+    private float _currentWeight;
+    private float _currentWaist;
+    private Texture2D _currentTexture;
+    private string _picID;
+    private GraphController _graphcontroller;
+    private DataService _dataService;
+    private string _recordID;
 
 
 
@@ -38,26 +36,23 @@ public class LogController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CurrentTexture = new Texture2D(150, 150);
-        dataService = StartupScript.ds;
+        _currentTexture = new Texture2D(150, 150);
+        _dataService = StartupScript.ds;
 
         if (!RuntimeManager.IsInitialized())
         {
             RuntimeManager.Init();
-        }
-
-               
+        }                       
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (weightInputField.text != null || weightInputField.text != "")
         {
             if (waistInputField.text != null || waistInputField.text != "")
             {
-                if (CurrentTexture != null)
+                if (_currentTexture != null)
                 {
                     saveButton.interactable = true;
                 }
@@ -103,13 +98,13 @@ public class LogController : MonoBehaviour
     {
         Debug.Log("**************************************** Save Texture");
 
-        if (FileAccessUtil.SavePic(CurrentTexture, picID))
+        if (FileAccessUtil.SavePic(_currentTexture, _picID))
         {
-            Debug.Log("Pic " + picID + " saved");
+            Debug.Log("Pic " + _picID + " saved");
         }
         else
         {
-            Debug.Log("error, pic " + picID + " not saved");
+            Debug.Log("error, pic " + _picID + " not saved");
         }
     }
 
@@ -120,7 +115,6 @@ public class LogController : MonoBehaviour
         newRecordImageObject.SetActive(true);
         Debug.Log("**************************************** Load Image Callback");
 
-
         if (!string.IsNullOrEmpty(error))
         {
             // TODO: There was an error, show it to users. 
@@ -129,33 +123,27 @@ public class LogController : MonoBehaviour
         else
         {
            
-            Debug.Log("recordID = " + recordID);
+            Debug.Log("recordID = " + _recordID);
 
-            CurrentTexture = image;
-            Debug.Log("Current texture set: " + recordID);
+            _currentTexture = image;
+            Debug.Log("Current texture set: " + _recordID);
         }
-
-  
-
 
         newRecordImageTexture2D.texture = image;
 
-        Debug.Log("loadimagecallback");
-  
-
-
+        Debug.Log("loadimagecallback");  
     }
 
     public void SaveRecordButton()
     {
         Debug.Log("**********************************************Save Record Button");
 
-        currentWeight = float.Parse(weightInputField.text);
-        currentWaist = float.Parse(waistInputField.text);
-        recordID = DateTime.Now.ToString();
-        picID = recordID.Replace(":", "").Replace("/", "").Replace(" ", "");
+        _currentWeight = float.Parse(weightInputField.text);
+        _currentWaist = float.Parse(waistInputField.text);
+        _recordID = DateTime.Now.ToString();
+        _picID = _recordID.Replace(":", "").Replace("/", "").Replace(" ", "");
 
-        if (dataService.AddUserLogEntry(DateTime.Now, currentWeight, currentWaist) == 1)
+        if (_dataService.AddUserLogEntry(DateTime.Now, _currentWeight, _currentWaist) == 1)
         {
             Debug.Log("*********************************************Userlog Added");
         }
@@ -166,21 +154,31 @@ public class LogController : MonoBehaviour
 
         SaveTexture();
         newRecordImageObject.SetActive(false);
-        CurrentTexture = null;
-        recordID = "";
-        picID = "";
-
-
+        _currentTexture = null;
+        _recordID = "";
+        _picID = "";
     }
 
     public void CancelNewRecord()
     {
         Debug.Log("**************************************** Cancel");
 
-        CurrentTexture = null;
-        recordID = "";
-        picID = "";
+        _currentTexture = null;
+        _recordID = "";
+        _picID = "";
     }
 
-
+    public void ToggleWeightWaistCharts()
+    {
+        if (waistChart.activeSelf)
+        {
+            waistChart.SetActive(false);
+            weightChart.SetActive(true);
+        }
+        else
+        {
+            waistChart.SetActive(true);
+            weightChart.SetActive(false);
+        }
+    }
 }

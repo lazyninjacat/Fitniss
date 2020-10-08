@@ -12,9 +12,15 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
     public WeightChartCellView weightChartCellViewPrefab;
     [SerializeField] TextMeshProUGUI upperLimitText;
     [SerializeField] TextMeshProUGUI lowerLimitText;
+    [SerializeField] TextMeshProUGUI lowerMidText;
+    [SerializeField] TextMeshProUGUI UpperMidText;
+
     private DataService dataService;
-    private float upperWeightLimit;
-    private float lowerWeightLimit;
+    private float upperLimit;
+    private float lowerLimit;
+    private float lowerMid;
+    private float UpperMid;
+
     public EnhancedScroller.TweenType vScrollerTweenType = EnhancedScroller.TweenType.immediate;
     public float vScrollerTweenTime = 0f;
 
@@ -26,21 +32,29 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
         // Find and set the upper and lower weight limits from the userlog table data
         foreach (var row in dataService.GetUserLogTable())
         {
-            if (row.Weight > upperWeightLimit - 10)
+            if (row.Weight > upperLimit - 2)
             {
-                upperWeightLimit = row.Weight + 10;
+                upperLimit = row.Weight + 2;
             }           
         }
 
-        lowerWeightLimit = upperWeightLimit - 20;
+        lowerLimit = upperLimit - 2;
+
+        float tempFloat = 0;
+
+        tempFloat = (float)((upperLimit - lowerLimit) / 4);
 
         foreach (var row in dataService.GetUserLogTable())
         {
-            if (row.Weight < lowerWeightLimit + 10)
+            if (row.Weight - 2 < lowerLimit)
             {
-                lowerWeightLimit = row.Weight - 10;
+                lowerLimit = row.Weight - 2;
             }
         }
+
+
+        lowerMid = lowerLimit + tempFloat;
+        UpperMid = upperLimit - tempFloat;
 
         Dictionary<DateTime, bool> calendarMap = new Dictionary<DateTime, bool>();
 
@@ -72,11 +86,11 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
                     {
                         if (row.Date.Month == currentMonthInt)
                         {
-                            _data.Add(new WeightChartCellData() { fillBar = (row.Weight - lowerWeightLimit) / (upperWeightLimit - lowerWeightLimit), date = row.Date.Day, month = 0, weight = (float)row.Weight });
+                            _data.Add(new WeightChartCellData() { fillBar = (row.Weight - lowerLimit) / (upperLimit - lowerLimit), date = row.Date.Day, month = 0, weight = (float)row.Weight });
                         }
                         else
                         {
-                            _data.Add(new WeightChartCellData() { fillBar = (row.Weight - lowerWeightLimit) / (upperWeightLimit - lowerWeightLimit), date = row.Date.Day, month = row.Date.Month, weight = (float)row.Weight });
+                            _data.Add(new WeightChartCellData() { fillBar = (row.Weight - lowerLimit) / (upperLimit - lowerLimit), date = row.Date.Day, month = row.Date.Month, weight = (float)row.Weight });
                         }
                         currentMonthInt = row.Date.Month;
                     }
@@ -97,8 +111,10 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
         }
         weightChartScroller.Delegate = this;
         weightChartScroller.ReloadData();
-        upperLimitText.text = upperWeightLimit.ToString();
-        lowerLimitText.text = lowerWeightLimit.ToString();
+        upperLimitText.text = upperLimit.ToString();
+        lowerLimitText.text = lowerLimit.ToString();
+        UpperMidText.text = UpperMid.ToString();
+        lowerMidText.text = lowerMid.ToString();
         weightChartScroller.JumpToDataIndex(400, 0, 0, true, vScrollerTweenType, vScrollerTweenTime, null, EnhancedScroller.LoopJumpDirectionEnum.Closest);
     }
 
