@@ -63284,6 +63284,8 @@ MonoBehaviour:
     type: 3}
   upperLimitText: {fileID: 1147830797}
   lowerLimitText: {fileID: 35235813}
+  vScrollerTweenType: 0
+  vScrollerTweenTime: 0
 --- !u!1 &2114414695
 GameObject:
   m_ObjectHideFlags: 0
@@ -63338,7 +63340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollDirection: 1
-  spacing: 10
+  spacing: 2
   padding:
     m_Left: 2
     m_Right: 2
@@ -63401,7 +63403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

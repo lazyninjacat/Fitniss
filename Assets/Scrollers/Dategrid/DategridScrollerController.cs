@@ -64,23 +64,11 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         LoadData();
     }
         
-
-
- 
-  
-    /// <summary>
-    /// Populates the data with a lot of records
-    /// </summary>
     private void LoadData()
     {
-        // set up some simple data
-
-
         DateTime today = DateTime.Today.Date;
 
         Dictionary<DateTime, bool> calendarMap = new Dictionary<DateTime, bool>();
-
-        // add all the days backward 364 days from today
 
         int tempInt = 0;
         if (today.DayOfWeek == DayOfWeek.Sunday)
@@ -203,26 +191,12 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
 
         int counter = 0;
 
-
         foreach (var pair in calendarMap)
-        {
-   
+        {   
             if (counter == 7)
             {
                 thisMonth = pair.Key.Month;
-                //if (thisMonth.Contains("/"))
-                //{
-                //    position = thisMonth.IndexOf("/");
-                //}
-                //else if (thisMonth.Contains("-"))
-                //{
-                //    position = thisMonth.IndexOf("-");
-                //}
-            
-
-
-                //thisMonth = thisMonth.Substring(0, position);
-
+              
                 if (thisMonth == currentMonth)
                 {
                     _data.Add(new DategridData() { isMonthCell = true, date = pair.Key.Date, isFirst = "0" });
@@ -233,13 +207,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
                 }
 
                 currentMonth = thisMonth;
-
-                counter = 0;
-                //Debug.Log("********** Added a Month Cell at date: " + pair.Key.Date);
-                
-
-
-
+                counter = 0;               
             }
 
             if (pair.Key.Date == today.AddDays(1).Date || pair.Key.Date == today.AddDays(2).Date || pair.Key.Date == today.AddDays(3).Date || pair.Key.Date == today.AddDays(4).Date || pair.Key.Date == today.AddDays(5).Date || pair.Key.Date == today.AddDays(6).Date)
@@ -250,64 +218,24 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
             {
                 _data.Add(new DategridData() { session = pair.Value, future = false, date = pair.Key.Date });
             }
-            //Debug.Log("* Added a calendar date cell at date: " + pair.Key);
-
             counter++;
         }
-
-
-
-
-
-        // OLD WAY
-        //for (int i = 1; i < 52; i++)
-        //{
-        //    _data.Insert(new DategridData() { isMonthCell = true, date = calendarMap.Keys.ElementAt((i * 8)-i), score = (i+1).ToString() }, (i*8)-i);
-        //    Debug.Log("Adding " + (i+1));
-        //}
-
-        // tell the scroller to reload now that we have the data
         scroller.ReloadData();
         scroller.JumpToDataIndex(400, 0, 0, true, vScrollerTweenType, vScrollerTweenTime, null, EnhancedScroller.LoopJumpDirectionEnum.Closest);
-
-       
-
     }
 
     #region EnhancedScroller Handlers
 
-    /// <summary>
-    /// This tells the scroller the number of cells that should have room allocated.
-    /// For this example, the count is the number of data elements divided by the number of cells per row (rounded up using Mathf.CeilToInt)
-    /// </summary>
-    /// <param name="scroller">The scroller that is requesting the data size</param>
-    /// <returns>The number of cells</returns>
     public int GetNumberOfCells(EnhancedScroller scroller)
     {
         return Mathf.CeilToInt((float)_data.Count / (float)numberOfCellsPerRow);
     }
 
-    /// <summary>
-    /// This tells the scroller what the size of a given cell will be. Cells can be any size and do not have
-    /// to be uniform. For vertical scrollers the cell size will be the height. For horizontal scrollers the
-    /// cell size will be the width.
-    /// </summary>
-    /// <param name="scroller">The scroller requesting the cell size</param>
-    /// <param name="dataIndex">The index of the data that the scroller is requesting</param>
-    /// <returns>The size of the cell</returns>
     public float GetCellViewSize(EnhancedScroller scroller, int dataIndex)
     {
         return 25f;
     }
 
-    /// <summary>
-    /// Gets the cell to be displayed. You can have numerous cell types, allowing variety in your list.
-    /// Some examples of this would be headers, footers, and other grouping cells.
-    /// </summary>
-    /// <param name="scroller">The scroller requesting the cell</param>
-    /// <param name="dataIndex">The index of the data that the scroller is requesting</param>
-    /// <param name="cellIndex">The index of the list. This will likely be different from the dataIndex if the scroller is looping</param>
-    /// <returns>The cell for the scroller to use</returns>
     public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int dataIndex, int cellIndex)
     {
     // first, we get a cell from the scroller by passing a prefab.
