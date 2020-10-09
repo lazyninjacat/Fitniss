@@ -78,7 +78,6 @@ public class DataService  {
 	}
 
 
-
     public IEnumerable<Config> GetConfigTable()
     {
         return _connection.Table<Config>();
@@ -86,7 +85,6 @@ public class DataService  {
 
     public IEnumerable<Circuits> GetCircuitsTable()
     {
-
         return _connection.Table<Circuits>();
     }
 
@@ -96,6 +94,13 @@ public class DataService  {
         Debug.Log("circuitTable = " + circuitTable + ". circuitName = " + circuitName + ". orderID = " +orderID);
         string query = "SELECT ExerciseName FROM " + circuitTable + " WHERE OrderID = ?";
         return _connection.ExecuteScalar<string>(query, orderID);
+    }
+
+    public int GetCircuitCount(string circuitName)
+    {
+        string circuitTable = GetCircuitTableName(circuitName);
+        string query = "SELECT COUNT (*) FROM " + circuitTable;
+        return _connection.ExecuteScalar<int>(query);
     }
 
     public string GetExerciseAmount(string circuitName, int orderID)
@@ -169,6 +174,23 @@ public class DataService  {
 
     }
 
+    public void UpdateExersiceLogScore(DateTime date, int scoreToBeAdded)
+    {
+        int tempScore = 0;
+        foreach(var row in GetExerciseLogTable())
+        {
+            if (row.Date.Date == date.Date)
+            {
+                tempScore = row.Score;
+            }
+        }
+
+        tempScore += scoreToBeAdded;
+
+        string cmd = "UPDATE ExerciseLog SET Score = ? WHERE Date = ?";
+        _connection.Execute(cmd, tempScore, date.Date);
+    }
+
     public int AddUserLogEntry(DateTime date, float weight, float waist)
     {
         Debug.Log("**********************************Dataservice add user log entry");
@@ -176,10 +198,10 @@ public class DataService  {
         return _connection.Execute(cmd, date.Date, weight, waist);
     }
 
-    public int AddExerciseLogEntry(DateTime date, string circuitName, int durationMinutes)
+    public int AddExerciseLogEntry(DateTime date, string circuitName, int durationMinutes, int score)
     {
-        string cmd = "INSERT INTO ExerciseLog (Date, CircuitName, Duration) VALUES(?,?,?)";
-        return _connection.Execute(cmd, date, circuitName, durationMinutes);
+        string cmd = "INSERT INTO ExerciseLog (Date, CircuitName, Duration, Score) VALUES(?,?,?,?)";
+        return _connection.Execute(cmd, date, circuitName, durationMinutes, score);
     }
 
 

@@ -110,10 +110,10 @@ public class WaistChartController : MonoBehaviour, IEnhancedScrollerDelegate
         }
         waistChartScroller.Delegate = this;
         waistChartScroller.ReloadData();
-        upperLimitText.text = upperLimit.ToString();
-        lowerLimitText.text = lowerLimit.ToString();
-        UpperMidText.text = UpperMid.ToString();
-        lowerMidText.text = lowerMid.ToString();
+        upperLimitText.text = Math.Ceiling(upperLimit).ToString();
+        lowerLimitText.text = Math.Ceiling(lowerLimit).ToString();
+        UpperMidText.text = Math.Ceiling(UpperMid).ToString();
+        lowerMidText.text = Math.Ceiling(lowerMid).ToString();
         waistChartScroller.JumpToDataIndex(400, 0, 0, true, vScrollerTweenType, vScrollerTweenTime, null, EnhancedScroller.LoopJumpDirectionEnum.Closest);
     }
 

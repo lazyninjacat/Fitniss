@@ -84,6 +84,8 @@ public class CircuitController : MonoBehaviour
 
     public void ConfirmLoadPresetButton()
     {
+        
+
         if (_dataService.UpdateCurrentCircuit(_selectedCircuitPreset) == 1)
         {
             currentPresetText.text = "Current Preset: " + _selectedCircuitPreset;
@@ -147,7 +149,7 @@ public class CircuitController : MonoBehaviour
                 if (_dataService.GetExerciseType(_currentCircuit, _circuitOrder) == "time")
                 {
                     Debug.Log("timed");
-                    //doneButton.interactable = false;
+                    doneButton.interactable = false;
                     StartTimer();
                 }
                 else
@@ -163,7 +165,32 @@ public class CircuitController : MonoBehaviour
                 _endTime = DateTime.Now;
                 _duration = _endTime.Minute - _startTime.Minute;
                 Debug.Log("Duration = " + _duration);
-                _dataService.AddExerciseLogEntry(DateTime.Today.Date, _currentCircuit, _duration);
+
+                int tempCircuitScore = 0;
+
+                foreach (var row in _dataService.GetCircuitsTable())
+                {
+                    if (row.CircuitName == _currentCircuit)
+                    {
+                        tempCircuitScore = row.Score;
+                    }
+                }
+
+
+
+                foreach (var row in _dataService.GetExerciseLogTable())
+                {
+                    if (row.Date.Date == DateTime.Today.Date)
+                    {
+                        _dataService.UpdateExersiceLogScore(row.Date.Date, tempCircuitScore);
+                    }
+                    else
+                    {
+                        _dataService.AddExerciseLogEntry(DateTime.Today.Date, _currentCircuit, _duration, tempCircuitScore);
+
+                    }
+                }
+
                 CurrentExerciseName.text = "Complete!!!";
                 CurrentExerciseAmount.text = "";
                 _circuitComplete = true;            
@@ -171,7 +198,7 @@ public class CircuitController : MonoBehaviour
         }
         else
         {
-            _graphcontroller.GoToNodeByName("StartMenu");
+            _graphcontroller.GoToNodeByName("NewRecord");
         }     
     }
 }

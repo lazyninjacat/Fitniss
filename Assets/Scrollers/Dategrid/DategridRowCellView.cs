@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using EnhancedUI.EnhancedScroller;
 using EnhancedUI;
 using System;
-
+using TMPro;
 
 /// <summary>
 /// This is the sub cell of the row cell
@@ -12,7 +12,7 @@ public class DategridRowCellView : MonoBehaviour
 {
     public GameObject container;
     public Image dateBackgroundImage;
-    public Text cellText;
+    public TextMeshProUGUI cellText;
 
     /// <summary>
     /// This function just takes the Demo data and displays it
@@ -29,12 +29,38 @@ public class DategridRowCellView : MonoBehaviour
         {
             if (data.session == true)
             {
-                dateBackgroundImage.color = new Color(0, 255, 0);
+                switch (data.score)
+                {
+                    case 0:
+                        //Debug.Log("case 0: " + data.date);
+                        break;
+                    case 1:
+                        //Debug.Log("case 1: " + data.date);
+                        dateBackgroundImage.color = new Color(0.6f, 1, 0.6f, 1);
+                        break;
+                    case 2:
+                        //Debug.Log("case 2 " + data.date);
+                        dateBackgroundImage.color = new Color(0, 1, 0, 1);
+                        break;
+                    case 3:
+                        //Debug.Log("case 3 " + data.date);
+                        dateBackgroundImage.color = new Color(0, 0.7f, 0, 1);
+                        break;
+                    case 4:
+                        //Debug.Log("case 4 " + data.date);
+                        dateBackgroundImage.color = new Color(0, 0.4f, 0, 1);
+                        break;
+                    default:
+                        //Debug.Log("case 5 " + data.date);
+                        dateBackgroundImage.color = new Color(0, 0.4f, 0, 1);
+                        break;
+                }
+
                 cellText.text = data.date.Day.ToString();
             }
             else
             {
-                dateBackgroundImage.color = new Color(10, 10, 10, 100);
+                dateBackgroundImage.color = new Color(0.8f, 0.8f, 0.8f, 0.4f);
                 cellText.text = data.date.Day.ToString();
             }
 

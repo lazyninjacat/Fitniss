@@ -29,12 +29,18 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
         dataService = StartupScript.ds;
         _data = new List<WeightChartCellData>();
 
+        upperLimit = 0;
+        UpperMid = 0;
+        lowerMid = 0;
+        lowerLimit = 0;
+        
         // Find and set the upper and lower weight limits from the userlog table data
         foreach (var row in dataService.GetUserLogTable())
         {
             if (row.Weight > upperLimit - 2)
             {
                 upperLimit = row.Weight + 2;
+                Debug.Log("upperLimit = " + upperLimit);
             }           
         }
 
@@ -42,15 +48,18 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
 
         float tempFloat = 0;
 
-        tempFloat = (float)((upperLimit - lowerLimit) / 4);
 
         foreach (var row in dataService.GetUserLogTable())
         {
             if (row.Weight - 2 < lowerLimit)
             {
                 lowerLimit = row.Weight - 2;
+                Debug.Log("lowerLimit = " + lowerLimit);
+
             }
         }
+
+        tempFloat = (float)((upperLimit - lowerLimit) / 4);
 
 
         lowerMid = lowerLimit + tempFloat;
@@ -111,10 +120,10 @@ public class WeightChartController : MonoBehaviour, IEnhancedScrollerDelegate
         }
         weightChartScroller.Delegate = this;
         weightChartScroller.ReloadData();
-        upperLimitText.text = upperLimit.ToString();
-        lowerLimitText.text = lowerLimit.ToString();
-        UpperMidText.text = UpperMid.ToString();
-        lowerMidText.text = lowerMid.ToString();
+        upperLimitText.text = Math.Ceiling(upperLimit).ToString();
+        lowerLimitText.text = Math.Ceiling(lowerLimit).ToString();
+        UpperMidText.text = Math.Ceiling(UpperMid).ToString();
+        lowerMidText.text = Math.Ceiling(lowerMid).ToString();
         weightChartScroller.JumpToDataIndex(400, 0, 0, true, vScrollerTweenType, vScrollerTweenTime, null, EnhancedScroller.LoopJumpDirectionEnum.Closest);
     }
 

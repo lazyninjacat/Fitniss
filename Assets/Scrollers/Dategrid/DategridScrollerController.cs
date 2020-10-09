@@ -116,7 +116,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
 
         if (today.DayOfWeek == DayOfWeek.Sunday)
         {
-            Debug.Log("Sunday");
+            //Debug.Log("Sunday");
             for (int i = 1; i < 7; i++)
             {
                 calendarMap.Add(today.AddDays(i), false);
@@ -124,7 +124,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         }
         else if (today.DayOfWeek == DayOfWeek.Monday)
         {
-            Debug.Log("Monday");
+            //Debug.Log("Monday");
             for (int i = 1; i < 6; i++)
             {
                 calendarMap.Add(today.AddDays(i), false);
@@ -132,7 +132,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         }
         else if (today.DayOfWeek == DayOfWeek.Tuesday)
         {
-            Debug.Log("Tuesday");
+            //Debug.Log("Tuesday");
             for (int i = 1; i < 5; i++)
             {
                 calendarMap.Add(today.AddDays(i), false);
@@ -140,7 +140,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         }
         else if (today.DayOfWeek == DayOfWeek.Wednesday)
         {
-            Debug.Log("Wednesday");
+            //Debug.Log("Wednesday");
             for (int i = 1; i < 4; i++)
             {
                 calendarMap.Add(today.AddDays(i), false);
@@ -148,7 +148,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         }
         else if (today.DayOfWeek == DayOfWeek.Thursday)
         {
-            Debug.Log("Thursday");
+            //Debug.Log("Thursday");
             for (int i = 1; i < 3; i++)
             {
                 calendarMap.Add(today.AddDays(i), false);
@@ -156,7 +156,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         }
         else if (today.DayOfWeek == DayOfWeek.Friday)
         {
-            Debug.Log("Friday");
+            //Debug.Log("Friday");
             for (int i = 1; i <2; i++)
             {
                 calendarMap.Add(today.AddDays(i), false);
@@ -164,7 +164,7 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         }
         else if (today.DayOfWeek == DayOfWeek.Saturday)
         {
-            Debug.Log("Saturday");
+            //Debug.Log("Saturday");
             for (int i = 1; i < 1; i++)
             {
                 calendarMap.Add(today.AddDays(i), false);
@@ -212,11 +212,20 @@ public class DategridScrollerController : MonoBehaviour, IEnhancedScrollerDelega
 
             if (pair.Key.Date == today.AddDays(1).Date || pair.Key.Date == today.AddDays(2).Date || pair.Key.Date == today.AddDays(3).Date || pair.Key.Date == today.AddDays(4).Date || pair.Key.Date == today.AddDays(5).Date || pair.Key.Date == today.AddDays(6).Date)
             {
-                _data.Add(new DategridData() { session = false, future = true, date = pair.Key.Date });
+                _data.Add(new DategridData() { session = false, future = true, date = pair.Key.Date});
             }
             else
             {
-                _data.Add(new DategridData() { session = pair.Value, future = false, date = pair.Key.Date });
+                int tempScore = 0;
+                foreach (var row in dataService.GetExerciseLogTable())
+                {
+                    if (row.Date.Date == pair.Key.Date)
+                    {
+                        tempScore = row.Score;
+                        //Debug.Log("Adding tempscore for " + pair.Key);
+                    }
+                }
+                _data.Add(new DategridData() { session = pair.Value, future = false, date = pair.Key.Date, score = tempScore });
             }
             counter++;
         }
