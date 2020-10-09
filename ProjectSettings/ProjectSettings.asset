@@ -172,7 +172,7 @@ PlayerSettings:
     iPhone: com.lzynjacat.fitniss
   buildNumber:
     iPhone: 6
-  AndroidBundleVersionCode: 5
+  AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 29
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
