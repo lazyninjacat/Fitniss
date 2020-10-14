@@ -324,7 +324,7 @@ MonoBehaviour:
         mValue: android.hardware.camera
       mIOSInfoPlistKeys:
       - mKey: NSPhotoLibraryUsageDescription
-        mValue: 
+        mValue: Needed to find and display photos of your progress
       - mKey: NSPhotoLibraryAddUsageDescription
         mValue: Needed to be able to save pictures to track your progress
       - mKey: NSCameraUsageDescription
@@ -344,7 +344,7 @@ MonoBehaviour:
   mIsAdModuleEnable: 0
   mIsIAPModuleEnable: 0
   mIsGameServiceModuleEnable: 0
-  mIsNotificationModuleEnable: 0
+  mIsNotificationModuleEnable: 1
   mIsSharingModuleEnable: 0
-  mActiveModuleIndex: 6
-  mIsSelectingModule: 1
+  mActiveModuleIndex: 4
+  mIsSelectingModule: 0

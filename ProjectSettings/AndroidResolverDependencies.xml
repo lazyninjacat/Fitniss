@@ -2,6 +2,7 @@
   <packages>
     <package>com.android.support:appcompat-v7:24.0.+</package>
     <package>com.android.support:support-v4:26.1.+</package>
+    <package>com.google.android.play:core:1.8.+</package>
     <package>com.sglib.easymobile:easy-mobile:1.+</package>
   </packages>
   <files>
@@ -18,7 +19,8 @@
     <file>Assets/Plugins/Android/com.android.support.support-media-compat-26.1.0.aar</file>
     <file>Assets/Plugins/Android/com.android.support.support-v4-26.1.0.aar</file>
     <file>Assets/Plugins/Android/com.android.support.support-vector-drawable-26.1.0.aar</file>
-    <file>Assets/Plugins/Android/com.sglib.easymobile.easy-mobile-1.3.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.android.play.core-1.8.2.aar</file>
+    <file>Assets/Plugins/Android/com.sglib.easymobile.easy-mobile-1.4.0.aar</file>
   </files>
   <settings>
     <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />

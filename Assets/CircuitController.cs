@@ -77,7 +77,7 @@ public class CircuitController : MonoBehaviour
 
         if (_dataService.GetExerciseType(_currentCircuit, _circuitOrder) == "time")
         {
-            //doneButton.interactable = false;
+            doneButton.interactable = false;
             StartTimer();
         }
     }
@@ -164,7 +164,6 @@ public class CircuitController : MonoBehaviour
             {
                 _endTime = DateTime.Now;
                 _duration = _endTime.Minute - _startTime.Minute;
-                Debug.Log("Duration = " + _duration);
 
                 int tempCircuitScore = 0;
 
@@ -177,18 +176,29 @@ public class CircuitController : MonoBehaviour
                 }
 
 
-
-                foreach (var row in _dataService.GetExerciseLogTable())
+                int count = 0;
+                foreach(var row in _dataService.GetExerciseLogTable())
                 {
-                    if (row.Date.Date == DateTime.Today.Date)
-                    {
-                        _dataService.UpdateExersiceLogScore(row.Date.Date, tempCircuitScore);
-                    }
-                    else
-                    {
-                        _dataService.AddExerciseLogEntry(DateTime.Today.Date, _currentCircuit, _duration, tempCircuitScore);
+                    count++;
+                }
 
+                if (count > 0)
+                {
+                    foreach (var row in _dataService.GetExerciseLogTable())
+                    {
+                        if (row.Date.Date == DateTime.Today.Date)
+                        {
+                            _dataService.UpdateExersiceLogScore(row.Date.Date, tempCircuitScore);
+                        }
+                        else
+                        {
+                            _dataService.AddExerciseLogEntry(DateTime.Today.Date, _currentCircuit, _duration, tempCircuitScore);
+                        }
                     }
+                }
+                else
+                {
+                    _dataService.AddExerciseLogEntry(DateTime.Today.Date, _currentCircuit, _duration, tempCircuitScore);
                 }
 
                 CurrentExerciseName.text = "Complete!!!";
